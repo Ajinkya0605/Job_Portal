@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // --- Shared Components ---
 
@@ -53,7 +53,7 @@ const Sidebar = ({ isOpen, onClose }) => (
         <p className="px-3 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Main Menu</p>
         {/* Active Dashboard Link */}
         <a href="#" className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-bold bg-[#1f6b7a]/10 text-[#1f6b7a] border border-[#1f6b7a]/20 shadow-sm transition-all">
-          <span className="material-symbols-outlined text-[20px]">dashboard</span>
+          <span className="material-symbols-outlined text-[20px]">dash_board</span>
           Dashboard
         </a>
         {[
