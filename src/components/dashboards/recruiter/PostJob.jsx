@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PostJob = () => {
@@ -36,11 +36,11 @@ const PostJob = () => {
       <div className="absolute bottom-0 left-[-50px] sm:left-0 w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] bg-purple-600/10 rounded-full blur-[80px] pointer-events-none"></div>
       
       {/* --- Header --- */}
-      <header className="sticky top-0 z-30 bg-[#1a1d23]/95 backdrop-blur-md border-b border-white/5 px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between relative">
+      <header className="sticky top-0 z-30 bg-[#151A25]/95 backdrop-blur-md border-b border-white/5 px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between relative">
         <div className="flex items-center gap-3 sm:gap-4">
           <button 
             onClick={() => navigate(-1)} 
-            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#1a1d23] border border-white/10 hover:border-primary/50 text-gray-400 hover:text-primary transition-all"
+            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#151A25] border border-white/10 hover:border-primary/50 text-gray-400 hover:text-primary transition-all"
           >
             <span className="material-symbols-outlined text-[18px] sm:text-[20px]">arrow_back</span>
           </button>
@@ -55,7 +55,7 @@ const PostJob = () => {
       <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 animate-fade-in">
         
         <div className="mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2 font-sans">Job Details</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-3xl font-extrabold mb-2 font-sans">Job Details</h2>
           <p className="text-gray-400 text-sm sm:text-base font-sans">Create a streamlined listing to attract the best talent.</p>
         </div>
 
@@ -68,7 +68,7 @@ const PostJob = () => {
             <input 
               type="text" 
               placeholder="e.g. Senior Product Designer" 
-              className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-gray-500 font-sans"
+              className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-gray-500 font-sans"
             />
           </div>
 
@@ -81,7 +81,7 @@ const PostJob = () => {
                 <input 
                   type="text" 
                   placeholder="e.g. Remote, New York" 
-                  className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl pl-10 sm:pl-11 pr-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-gray-500 font-sans"
+                  className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl pl-10 sm:pl-11 pr-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-gray-500 font-sans"
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@ const PostJob = () => {
             <div className="space-y-2">
               <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1 font-sans">Experience Level</label>
               <div className="relative">
-                <select className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer font-sans">
+                <select className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer font-sans">
                   <option>Select range</option>
                   <option>0-2 Years (Junior)</option>
                   <option>3-5 Years (Mid-Level)</option>
@@ -104,7 +104,7 @@ const PostJob = () => {
           {/* Skills Input (Interactive) */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1 font-sans">Required Skills</label>
-            <div className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl px-2 sm:px-3 py-2 sm:py-2.5 flex flex-wrap gap-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all min-h-[52px] sm:min-h-[56px]">
+            <div className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl px-2 sm:px-3 py-2 sm:py-2.5 flex flex-wrap gap-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all min-h-[52px] sm:min-h-[56px]">
               
               {/* Skill Tags */}
               {skills.map((skill) => (
@@ -130,7 +130,7 @@ const PostJob = () => {
           </div>
 
           {/* Toggle: Fresher Allowed */}
-          <div className="bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div className="flex-1">
               <h3 className="text-sm sm:text-base font-bold text-white font-sans">Freshers Only</h3>
               <p className="text-xs sm:text-sm text-gray-500 mt-0.5 font-sans">Enable if candidates with no prior experience can apply.</p>
@@ -147,9 +147,9 @@ const PostJob = () => {
           {/* Job Description (Rich Text Mock) */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1 font-sans">Job Description</label>
-            <div className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl overflow-hidden focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+            <div className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl overflow-hidden focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
               {/* Toolbar */}
-              <div className="bg-[#21242c] border-b border-white/5 px-2 sm:px-3 py-2 flex gap-1 sm:gap-2 overflow-x-auto">
+              <div className="bg-[#151A25] border-b border-white/5 px-2 sm:px-3 py-2 flex gap-1 sm:gap-2 overflow-x-auto">
                 {['format_bold', 'format_italic', 'format_underlined', 'format_list_bulleted', 'format_list_numbered', 'link'].map((icon) => (
                   <button key={icon} className="p-1.5 sm:p-2 rounded hover:bg-white/10 text-gray-400 hover:text-primary transition-colors shrink-0" aria-label={icon.replace('format_', '').replace('_', ' ')}>
                     <span className="material-symbols-outlined text-base sm:text-[18px]">{icon}</span>
@@ -170,15 +170,15 @@ const PostJob = () => {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
               <div className="flex-1 relative">
                  <span className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">$</span>
-                 <input type="number" placeholder="Min" className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl pl-7 sm:pl-8 pr-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-gray-500 font-sans" />
+                 <input type="number" placeholder="Min" className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl pl-7 sm:pl-8 pr-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-gray-500 font-sans" />
               </div>
               <span className="text-gray-500 text-center sm:text-left">-</span>
               <div className="flex-1 relative">
                  <span className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">$</span>
-                 <input type="number" placeholder="Max" className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl pl-7 sm:pl-8 pr-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-gray-500 font-sans" />
+                 <input type="number" placeholder="Max" className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl pl-7 sm:pl-8 pr-4 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-gray-500 font-sans" />
               </div>
               <div className="w-full sm:w-24">
-                <select className="w-full bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl px-3 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer font-sans">
+                <select className="w-full bg-[#151A25] border border-white/10 rounded-lg sm:rounded-xl px-3 py-3 sm:py-3.5 text-sm sm:text-base text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer font-sans">
                   <option>USD</option>
                   <option>INR</option>
                   <option>EUR</option>

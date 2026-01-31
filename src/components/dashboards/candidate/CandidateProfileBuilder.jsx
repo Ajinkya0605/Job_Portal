@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { 
-  User, 
-  Code, 
-  Folder, 
-  BarChart2, 
-  Settings, 
-  Github, 
-  Globe, 
-  Linkedin, 
-  GraduationCap, 
-  Save, 
+﻿import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  User,
+  Code,
+  Folder,
+  BarChart2,
+  Settings,
+  Github,
+  Globe,
+  Linkedin,
+  GraduationCap,
+  Save,
   CheckCircle2,
   Plus,
-  Menu, 
+  Menu,
   X,
   BookOpen,   // Added for Education
   Award,      // Added for Certifications
@@ -21,10 +22,11 @@ import {
 } from 'lucide-react';
 
 const StudentProfileBuilder = () => {
+  const navigate = useNavigate();
   // Theme configuration matches your Landing Page
   const theme = {
-    bg: "bg-[#15171c]",
-    cardBg: "bg-[#1a1d23]",
+    bg: "bg-[#0B0B15]",
+    cardBg: "bg-[#151A25]",
     accent: "bg-[#1f6b7a]",
     accentHover: "hover:bg-[#185662]",
     textPrimary: "text-white",
@@ -41,10 +43,10 @@ const StudentProfileBuilder = () => {
     const element = document.getElementById(id);
     if (element) {
       // Offset for sticky header on mobile if needed, or just smooth scroll
-      const yOffset = -20; 
+      const yOffset = -20;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      window.scrollTo({top: y, behavior: 'smooth'});
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
       setActiveSection(id);
       setIsMobileMenuOpen(false); // Close mobile menu after click
     }
@@ -54,8 +56,8 @@ const StudentProfileBuilder = () => {
   const BrandLogo = () => (
     <div className="flex items-center gap-2">
       <div className="w-8 h-8 text-[#1f6b7a] flex items-center justify-center bg-[#1f6b7a]/20 rounded-full border border-[#1f6b7a]/30">
-         {/* Using the P as placeholder exactly as you requested */}
-         <span className="material-symbols-outlined text-[20px] font-bold">psychology</span> 
+        {/* Using the P as placeholder exactly as you requested */}
+        <span className="material-symbols-outlined text-[20px] font-bold">psychology</span>
       </div>
       <h2 className="text-white text-xl font-bold tracking-tight">SkillHire</h2>
     </div>
@@ -81,11 +83,11 @@ const StudentProfileBuilder = () => {
 
   return (
     <div className={`min-h-screen ${theme.bg} ${theme.textPrimary} font-sans flex flex-col lg:block selection:bg-[#1f6b7a] selection:text-white scroll-smooth`}>
-      
+
       {/* ================= MOBILE HEADER ================= */}
-      <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-800 bg-[#15171c] sticky top-0 z-30">
+      <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-800 bg-[#0B0B15] sticky top-0 z-30">
         <BrandLogo />
-        <button 
+        <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800"
         >
@@ -95,7 +97,7 @@ const StudentProfileBuilder = () => {
 
       {/* ================= MOBILE OVERLAY ================= */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
@@ -103,13 +105,16 @@ const StudentProfileBuilder = () => {
 
       {/* ================= SIDEBAR ================= */}
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-64 border-r ${theme.border} bg-[#15171c] flex flex-col p-6 
+        fixed inset-y-0 left-0 z-50 w-64 border-r ${theme.border} bg-[#0B0B15] flex flex-col p-6 
         transform transition-transform duration-300 ease-in-out
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
         lg:translate-x-0 lg:fixed
       `}>
         {/* Logo (Desktop) */}
-        <div className="h-24 flex items-center px-3 border-b border-white/5 bg-[#15171c]">
+        <div
+          className="h-24 flex items-center px-3 border-b border-white/5 bg-[#0B0B15] cursor-pointer hover:bg-white/5 transition-colors"
+          onClick={() => navigate('/')}
+        >
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 text-[#1f6b7a] flex items-center justify-center bg-[#1f6b7a]/20 rounded-full border border-[#1f6b7a]/30">
               <span className="material-symbols-outlined text-[32px]">psychology</span>
@@ -132,19 +137,26 @@ const StudentProfileBuilder = () => {
         {/* User Mini Profile */}
         <div className={`mt-auto p-4 rounded-xl ${theme.cardBg} border ${theme.border} flex items-center gap-3`}>
           <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-500"></div>
-          <div>
-            <p className="text-sm font-medium">Alex Chen</p>
-            <p className="text-xs text-teal-400">Premium Member</p>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium truncate">Alex Chen</p>
+            <p className="text-xs text-teal-400 truncate">Premium Member</p>
           </div>
+          <button
+            className="text-gray-500 hover:text-white transition-colors"
+            onClick={() => navigate('/auth')}
+            title="Sign Out"
+          >
+            <span className="material-symbols-outlined text-[18px]">logout</span>
+          </button>
         </div>
       </aside>
 
       {/* ================= MAIN CONTENT ================= */}
       <main className="lg:ml-64 flex-1 p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* CENTER COLUMN (STACKED SECTIONS) */}
         <div className="col-span-1 lg:col-span-8 space-y-12 pb-20">
-          
+
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
@@ -155,7 +167,7 @@ const StudentProfileBuilder = () => {
               <h1 className="text-2xl md:text-3xl font-bold">Student Profile Builder</h1>
               <p className={`${theme.textSecondary} mt-2 text-sm md:text-base`}>Showcase your technical prowess and projects to top-tier recruiters.</p>
             </div>
-            
+
             {/* Completion Score */}
             <div className={`w-full md:w-auto px-5 py-3 rounded-2xl ${theme.cardBg} border ${theme.border} flex items-center justify-between md:justify-start gap-4`}>
               <div className="text-right">
@@ -204,8 +216,8 @@ const StudentProfileBuilder = () => {
                   </div>
 
                   {/* Toggle Switch */}
-                  <div 
-                    className="flex items-center gap-3 cursor-pointer select-none" 
+                  <div
+                    className="flex items-center gap-3 cursor-pointer select-none"
                     onClick={() => setIsOpenToWork(!isOpenToWork)}
                   >
                     <div className={`w-10 h-5 rounded-full relative transition-colors ${isOpenToWork ? 'bg-[#1f6b7a]' : 'bg-gray-600'}`}>
@@ -217,8 +229,8 @@ const StudentProfileBuilder = () => {
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Professional Biography</label>
-                  <textarea 
-                    className={`w-full h-24 rounded-xl bg-[#15171c] border ${theme.border} p-4 text-sm text-gray-300 focus:outline-none focus:border-[#1f6b7a] transition-colors resize-none`}
+                  <textarea
+                    className={`w-full h-24 rounded-xl bg-[#0B0B15] border ${theme.border} p-4 text-sm text-gray-300 focus:outline-none focus:border-[#1f6b7a] transition-colors resize-none`}
                     placeholder="Tell your professional story..."
                   ></textarea>
                 </div>
@@ -228,20 +240,20 @@ const StudentProfileBuilder = () => {
 
           {/* SECTION 2: EDUCATION (New) */}
           <section id="education" className={`p-6 md:p-8 rounded-3xl ${theme.cardBg} border ${theme.border}`}>
-            <SectionTitle title="Education" subtitle="Your academic journey" action={<><Plus size={14}/> Add Education</>} />
-            
+            <SectionTitle title="Education" subtitle="Your academic journey" action={<><Plus size={14} /> Add Education</>} />
+
             <div className="space-y-4">
-              <EducationCard 
-                school="University of Technology" 
-                degree="B.Tech in Computer Science" 
-                year="2021 - 2025" 
+              <EducationCard
+                school="University of Technology"
+                degree="B.Tech in Computer Science"
+                year="2021 - 2025"
                 grade="CGPA: 9.2"
                 logo="UT"
               />
-              <EducationCard 
-                school="City High School" 
-                degree="Secondary Education (Science)" 
-                year="2019 - 2021" 
+              <EducationCard
+                school="City High School"
+                degree="Secondary Education (Science)"
+                year="2019 - 2021"
                 grade="Percentage: 95%"
                 logo="CH"
               />
@@ -254,7 +266,7 @@ const StudentProfileBuilder = () => {
 
             <div className="flex flex-wrap gap-3">
               {['React.js', 'TypeScript', 'Node.js', 'GraphQL', 'AWS Cloud', 'Tailwind CSS', 'Docker', 'Python'].map((skill) => (
-                <span key={skill} className="px-4 py-2 rounded-xl bg-[#15171c] border border-gray-800 text-sm text-gray-300 hover:border-[#1f6b7a] hover:text-[#1f6b7a] cursor-pointer transition-all">
+                <span key={skill} className="px-4 py-2 rounded-xl bg-[#0B0B15] border border-gray-800 text-sm text-gray-300 hover:border-[#1f6b7a] hover:text-[#1f6b7a] cursor-pointer transition-all">
                   {skill}
                 </span>
               ))}
@@ -266,8 +278,8 @@ const StudentProfileBuilder = () => {
 
           {/* SECTION 4: CERTIFICATIONS (New) */}
           <section id="certifications" className={`p-6 md:p-8 rounded-3xl ${theme.cardBg} border ${theme.border}`}>
-            <SectionTitle title="Certifications" subtitle="Validated skills and achievements" action={<><Plus size={14}/> Add Certificate</>} />
-            
+            <SectionTitle title="Certifications" subtitle="Validated skills and achievements" action={<><Plus size={14} /> Add Certificate</>} />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <CertCard title="AWS Certified Cloud Practitioner" issuer="Amazon Web Services" date="Issued Dec 2024" />
               <CertCard title="Meta Front-End Developer" issuer="Coursera" date="Issued Aug 2024" />
@@ -276,16 +288,16 @@ const StudentProfileBuilder = () => {
 
           {/* SECTION 5: PROJECTS (New) */}
           <section id="projects" className={`p-6 md:p-8 rounded-3xl ${theme.cardBg} border ${theme.border}`}>
-            <SectionTitle title="Projects" subtitle="Showcase your best work" action={<><Plus size={14}/> Add Project</>} />
+            <SectionTitle title="Projects" subtitle="Showcase your best work" action={<><Plus size={14} /> Add Project</>} />
 
             <div className="space-y-4">
-              <ProjectCard 
-                title="E-Commerce Dashboard" 
+              <ProjectCard
+                title="E-Commerce Dashboard"
                 desc="A comprehensive React dashboard for managing inventory, orders, and analytics with dark mode support."
                 stack={["React", "Tailwind", "Recharts"]}
               />
-              <ProjectCard 
-                title="AI Content Generator" 
+              <ProjectCard
+                title="AI Content Generator"
                 desc="SaaS application leveraging OpenAI API to help marketers generate blog posts and social media captions."
                 stack={["Next.js", "OpenAI API", "Stripe"]}
               />
@@ -296,7 +308,7 @@ const StudentProfileBuilder = () => {
 
         {/* RIGHT COLUMN (Neural Links & Timeline) */}
         <div className="col-span-1 lg:col-span-4 space-y-6">
-          
+
           {/* Neural Links */}
           <div className={`p-6 rounded-3xl ${theme.cardBg} border ${theme.border}`}>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-5">Neural Links</h3>
@@ -310,17 +322,17 @@ const StudentProfileBuilder = () => {
           {/* Data Stream (Timeline) */}
           <div className={`p-6 rounded-3xl ${theme.cardBg} border ${theme.border} relative`}>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-6">Data Stream</h3>
-            
+
             <div className="relative pl-4 border-l border-gray-800 space-y-8">
-              <TimelineItem 
-                role="Full Stack Intern" 
-                company="Starlight Systems" 
+              <TimelineItem
+                role="Full Stack Intern"
+                company="Starlight Systems"
                 date="2023 - Pres."
                 active
               />
-              <TimelineItem 
-                role="Computer Science" 
-                company="University of Tech" 
+              <TimelineItem
+                role="Computer Science"
+                company="University of Tech"
                 date="2021 - 2025"
                 icon={<GraduationCap size={16} />}
               />
@@ -328,10 +340,10 @@ const StudentProfileBuilder = () => {
 
             {/* Save Button */}
             <div className="mt-8 sticky top-8">
-               <button className={`w-full py-4 rounded-xl ${theme.accent} ${theme.accentHover} text-white font-bold shadow-lg shadow-teal-900/20 flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02]`}>
+              <button className={`w-full py-4 rounded-xl ${theme.accent} ${theme.accentHover} text-white font-bold shadow-lg shadow-teal-900/20 flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02]`}>
                 <Save size={18} />
                 SAVE CONFIG
-               </button>
+              </button>
             </div>
           </div>
 
@@ -344,7 +356,7 @@ const StudentProfileBuilder = () => {
 // --- Sub Components ---
 
 const NavButton = ({ icon, label, id, active, onClick }) => (
-  <button 
+  <button
     onClick={() => onClick(id)}
     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all text-left ${active ? 'bg-[#1f6b7a]/10 text-[#1f6b7a] border border-[#1f6b7a]/20' : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'}`}
   >
@@ -360,7 +372,7 @@ const Badge = ({ text }) => (
 );
 
 const LinkItem = ({ icon, title, status, active }) => (
-  <div className={`flex items-center justify-between p-4 rounded-xl border transition-all ${active ? 'bg-[#15171c] border-[#1f6b7a]/50' : 'bg-[#15171c] border-gray-800 hover:border-gray-700'}`}>
+  <div className={`flex items-center justify-between p-4 rounded-xl border transition-all ${active ? 'bg-[#0B0B15] border-[#1f6b7a]/50' : 'bg-[#0B0B15] border-gray-800 hover:border-gray-700'}`}>
     <div className="flex items-center gap-3">
       <div className={`p-2 rounded-lg ${active ? 'bg-[#1f6b7a] text-white' : 'bg-gray-800 text-gray-400'}`}>
         {icon}
@@ -380,8 +392,8 @@ const LinkItem = ({ icon, title, status, active }) => (
 const TimelineItem = ({ role, company, date, active }) => (
   <div className="relative group">
     {/* Timeline Dot */}
-    <div className={`absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full border-2 ${active ? 'bg-[#1f6b7a] border-[#1f6b7a] shadow-[0_0_10px_rgba(31,107,122,0.5)]' : 'bg-[#15171c] border-gray-600'}`}></div>
-    
+    <div className={`absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full border-2 ${active ? 'bg-[#1f6b7a] border-[#1f6b7a] shadow-[0_0_10px_rgba(31,107,122,0.5)]' : 'bg-[#0B0B15] border-gray-600'}`}></div>
+
     <div className="mb-1 flex justify-between items-start">
       <h4 className={`text-sm font-bold ${active ? 'text-white' : 'text-gray-300'}`}>{role}</h4>
       <span className="text-[10px] font-mono text-gray-500">{date}</span>
@@ -397,7 +409,7 @@ const TimelineItem = ({ role, company, date, active }) => (
 
 // New Cards for new sections
 const EducationCard = ({ school, degree, year, grade, logo }) => (
-  <div className="flex gap-4 p-4 rounded-xl bg-[#15171c] border border-gray-800 hover:border-gray-700 transition-colors">
+  <div className="flex gap-4 p-4 rounded-xl bg-[#0B0B15] border border-gray-800 hover:border-gray-700 transition-colors">
     <div className="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center font-bold text-gray-500 border border-gray-700 shrink-0">
       {logo}
     </div>
@@ -413,7 +425,7 @@ const EducationCard = ({ school, degree, year, grade, logo }) => (
 );
 
 const CertCard = ({ title, issuer, date }) => (
-  <div className="p-4 rounded-xl bg-[#15171c] border border-gray-800 hover:border-[#1f6b7a]/50 transition-colors cursor-pointer group">
+  <div className="p-4 rounded-xl bg-[#0B0B15] border border-gray-800 hover:border-[#1f6b7a]/50 transition-colors cursor-pointer group">
     <div className="flex justify-between items-start mb-2">
       <div className="p-2 rounded-lg bg-gray-800 text-[#1f6b7a] group-hover:bg-[#1f6b7a] group-hover:text-white transition-colors">
         <Award size={18} />
@@ -427,12 +439,12 @@ const CertCard = ({ title, issuer, date }) => (
 );
 
 const ProjectCard = ({ title, desc, stack }) => (
-  <div className="p-4 rounded-xl bg-[#15171c] border border-gray-800 hover:border-[#1f6b7a]/50 transition-colors">
+  <div className="p-4 rounded-xl bg-[#0B0B15] border border-gray-800 hover:border-[#1f6b7a]/50 transition-colors">
     <div className="flex justify-between items-start">
       <h4 className="font-bold text-white mb-1">{title}</h4>
       <div className="flex gap-2">
-         <Github size={16} className="text-gray-500 hover:text-white cursor-pointer" />
-         <ExternalLink size={16} className="text-gray-500 hover:text-white cursor-pointer" />
+        <Github size={16} className="text-gray-500 hover:text-white cursor-pointer" />
+        <ExternalLink size={16} className="text-gray-500 hover:text-white cursor-pointer" />
       </div>
     </div>
     <p className="text-sm text-gray-400 mb-3 leading-relaxed">{desc}</p>
