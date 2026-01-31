@@ -132,7 +132,7 @@ const PostJob = () => {
           {/* Toggle: Fresher Allowed */}
           <div className="bg-[#1a1d23] border border-white/10 rounded-lg sm:rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div className="flex-1">
-              <h3 className="text-sm sm:text-base font-bold text-white font-sans">Fresher Allowed?</h3>
+              <h3 className="text-sm sm:text-base font-bold text-white font-sans">Freshers Only</h3>
               <p className="text-xs sm:text-sm text-gray-500 mt-0.5 font-sans">Enable if candidates with no prior experience can apply.</p>
             </div>
             <button 

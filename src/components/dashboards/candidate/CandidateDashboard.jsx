@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // --- Shared Components ---
 
@@ -33,8 +34,9 @@ const Sidebar = ({ isOpen, onClose }) => (
       {/* Logo Area */}
       <div className="h-20 flex items-center px-6 border-b border-white/5 bg-[#15171c]">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 text-[#1f6b7a] flex items-center justify-center bg-[#1f6b7a]/20 rounded-full border border-[#1f6b7a]/30">
-            <span className="material-symbols-outlined text-[20px]">psychology</span>
+          {/* Increase the logo size and reduce padding */}
+          <div className="w-12 h-12 text-[#1f6b7a] flex items-center justify-center bg-[#1f6b7a]/20 rounded-full border border-[#1f6b7a]/30 p-0">
+            <span className="material-symbols-outlined text-[32px] leading-none">psychology</span>
           </div>
           <h2 className="text-white text-lg font-bold tracking-tight font-sans">SkillHire</h2>
         </div>
@@ -56,24 +58,28 @@ const Sidebar = ({ isOpen, onClose }) => (
           <span className="material-symbols-outlined text-[20px]">dashboard</span>
           Dashboard
         </a>
+        {/* Custom Menu Array to Insert Fresher's Section Below Applications */}
         {[
           { icon: 'search', label: 'Find Jobs' },
           { icon: 'send', label: 'Applications', badge: 4 },
+          { icon: 'badge', label: "Fresher's Section" },
           { icon: 'chat_bubble', label: 'Messages' },
           { icon: 'verified_user', label: 'Assessments' }
-        ].map((item) => (
-          <a key={item.label} href="#" className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
-            <span className="material-symbols-outlined text-[20px] group-hover:text-[#1f6b7a] transition-colors">{item.icon}</span>
-            {item.label}
-            {item.badge && <span className="ml-auto bg-[#1f6b7a] text-white text-[10px] font-bold py-0.5 px-2 rounded-full shadow-lg">{item.badge}</span>}
-          </a>
-        ))}
+        ].map((item, index) => {
+          return (
+            <a key={item.label} href="#" className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
+              <span className="material-symbols-outlined text-[20px] group-hover:text-[#1f6b7a] transition-colors">{item.icon}</span>
+              {item.label}
+              {item.badge && <span className="ml-auto bg-[#1f6b7a] text-white text-[10px] font-bold py-0.5 px-2 rounded-full shadow-lg">{item.badge}</span>}
+            </a>
+          )
+        })}
         <div className="pt-6 mt-6 border-t border-white/5">
           <p className="px-3 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Settings</p>
-          <a href="#" className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
+          <Link to="/dashboard/candidate/profile" onClick={onClose} className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
             <span className="material-symbols-outlined text-[20px] group-hover:text-[#1f6b7a] transition-colors">person</span>
             Profile
-          </a>
+          </Link>
           <a href="#" className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
             <span className="material-symbols-outlined text-[20px] group-hover:text-[#1f6b7a] transition-colors">settings</span>
             Settings
@@ -105,8 +111,9 @@ const JobCard = ({ logo, role, company, tags, match, salary }) => (
     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
     <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
       <div className="flex-shrink-0">
-        <div className="w-12 h-12 rounded-lg bg-[#1a1d23] border border-white/10 flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
-          <span className="material-symbols-outlined text-[24px]">{logo}</span>
+        {/* Increase the logo size and reduce the padding */}
+        <div className="w-16 h-16 rounded-lg bg-[#1a1d23] border border-white/10 flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-105 transition-transform duration-300 p-0">
+          <span className="material-symbols-outlined text-[40px] leading-none">{logo}</span>
         </div>
       </div>
       <div className="flex-1 min-w-0 w-full">
@@ -171,9 +178,9 @@ export default function Dashboard() {
       {/* Sidebar for large screens & mobile drawer */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Hamburger Button - only on mobile (above layout header so menu is visible on small devices) */}
+      {/* Hamburger Button - only on mobile (now top right) */}
       <button
-        className="fixed top-4 left-4 z-[60] flex items-center justify-center w-10 h-10 bg-[#21242c] rounded-lg border border-white/10 lg:hidden hover:bg-[#1a1d23]/80 transition-colors focus:outline-none shadow"
+        className="fixed top-4 right-4 z-[60] flex items-center justify-center w-10 h-10 bg-[#21242c] rounded-lg border border-white/10 lg:hidden hover:bg-[#1a1d23]/80 transition-colors focus:outline-none shadow"
         style={{ WebkitTapHighlightColor: 'transparent' }}
         aria-label="Open sidebar"
         onClick={() => setSidebarOpen(true)}
@@ -185,7 +192,7 @@ export default function Dashboard() {
       <div className="flex-1 flex flex-col h-full relative bg-[#15171c] ml-0 lg:ml-0">
         {/* Ambient Glow */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30"
-             style={{ background: 'radial-gradient(circle at 60% 40%, rgba(76, 29, 149, 0.15) 0%, rgba(31, 107, 122, 0.1) 40%, rgba(21, 23, 28, 0) 70%)' }}>
+          style={{ background: 'radial-gradient(circle at 60% 40%, rgba(76, 29, 149, 0.15) 0%, rgba(31, 107, 122, 0.1) 40%, rgba(21, 23, 28, 0) 70%)' }}>
         </div>
 
         {/* Header */}
@@ -204,18 +211,14 @@ export default function Dashboard() {
             <h1 className="text-lg font-bold text-white tracking-tight truncate">Welcome back, John</h1>
             <p className="text-[11px] text-gray-400 hidden sm:block truncate">Here's what's happening today</p>
           </div>
-          <div className="w-1/3 flex justify-end items-center gap-3">
-            <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white rounded-lg bg-[#1a1d23] border border-white/5 hover:border-white/10 transition-all relative">
-              <span className="material-symbols-outlined text-[22px]">notifications</span>
-              <span className="absolute top-2.5 right-3 w-2 h-2 bg-[#1f6b7a] rounded-full shadow-[0_0_8px_rgba(31,107,122,0.8)]"></span>
-            </button>
-          </div>
+          {/* Removed notification icon */}
+          <div className="w-1/3 flex justify-end items-center gap-3"></div>
         </header>
 
         {/* Dashboard Body - Adjusted Layout & Spacing */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 relative z-10 custom-scrollbar">
           <div className="w-full space-y-6 sm:space-y-8">
-            
+
             {/* Stats Row */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
               <StatCard icon="edit_note" label="Profile Status" value="85%" progress={true} />
@@ -225,7 +228,7 @@ export default function Dashboard() {
 
             {/* Split Row */}
             <div className="grid grid-cols-1 gap-8 h-full lg:grid-cols-3">
-              
+
               {/* Left: Job Feed */}
               <div className="lg:col-span-2 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-1 gap-2">
