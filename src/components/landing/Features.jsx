@@ -9,8 +9,8 @@ const Features = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 border-b border-white/5 pb-8">
-          <div className="max-w-2xl">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 border-b border-white/5 pb-8">
+          <div className="max-w-2xl text-center md:text-left">
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 font-sans tracking-tight">
               ML-Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Capabilities</span>
             </h2>
@@ -25,7 +25,7 @@ const Features = () => {
         </div>
 
         {/* Bento Grid Layout - Neat & Visual */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[300px]">
 
           {/* Card 1: Skill Verification (Tall Card) */}
           <div className="md:col-span-2 md:row-span-2 bg-[#15171c]/60 backdrop-blur-xl rounded-3xl border border-white/10 p-8 relative overflow-hidden group hover:border-primary/50 hover:shadow-[0_0_30px_rgba(31,107,122,0.1)] transition-all duration-500">
