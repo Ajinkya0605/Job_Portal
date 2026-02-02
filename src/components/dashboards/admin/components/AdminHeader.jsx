@@ -1,17 +1,24 @@
 ﻿import React from 'react';
-import { Search, Bell, ShieldCheck } from 'lucide-react';
+import { Search, Bell, ShieldCheck, Menu } from 'lucide-react';
 
-const AdminHeader = () => {
+const AdminHeader = ({ onMenuToggle }) => {
     return (
-        <header className="h-16 border-b border-gray-800/50 bg-[#0B0B15] px-8 flex items-center justify-between sticky top-0 z-40">
+        <header className="h-16 border-b border-gray-800/50 bg-[#0B0B15] px-4 lg:px-8 flex items-center justify-between sticky top-0 z-40">
 
             {/* Left: Breadcrumbs / Status */}
             <div className="flex items-center gap-4">
+                <button
+                    onClick={onMenuToggle}
+                    className="p-2 -ml-2 text-gray-400 hover:text-white lg:hidden"
+                >
+                    <Menu size={24} />
+                </button>
                 <h1 className="text-lg font-bold text-white flex items-center gap-2">
-                    Moderation Console
+                    <span className="hidden sm:inline">Moderation Console</span>
+                    <span className="sm:hidden">Admin</span>
                 </h1>
-                <div className="h-4 w-px bg-gray-700"></div>
-                <div className="flex items-center gap-2 text-xs font-mono text-green-500 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
+                <div className="h-4 w-px bg-gray-700 hidden sm:block"></div>
+                <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-green-500 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
                     SYSTEM OPERATIONAL
                 </div>

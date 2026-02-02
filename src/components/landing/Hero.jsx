@@ -33,7 +33,7 @@ const Hero = () => {
         </div>
 
         {/* Headline - Mixed Shades & Gradient */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tighter text-white font-sans">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tighter text-white font-sans text-center">
           Hire by <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1f6b7a] via-cyan-400 to-blue-500 animate-gradient-x">Skills</span>, <br />
           <span className="relative">
             Not Resumes
@@ -50,7 +50,7 @@ const Hero = () => {
         </p>
 
         {/* Buttons - Modern Glassmorphism */}
-        <div className="flex flex-col sm:flex-row gap-5 w-full justify-center pt-6">
+        <div className="flex flex-col sm:flex-row items-center gap-5 w-full justify-center pt-6">
           <Link to="/auth">
             <button className="group relative px-8 py-4 bg-primary text-white font-bold rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(31,107,122,0.6)]">
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
