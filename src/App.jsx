@@ -24,6 +24,8 @@ import RecruiterJobs from './components/dashboards/recruiter/RecruiterJobs'; // 
 import RecruiterSettings from './components/dashboards/recruiter/RecruiterSettings'; // New Page
 import PostJob from './components/dashboards/recruiter/PostJob';
 import AdminDashboard from './components/dashboards/admin/AdminDashboard';
+import AdminOverview from './components/dashboards/admin/AdminOverview';
+import UsersPage from './components/dashboards/admin/UsersPage';
 
 function App() {
   const location = useLocation();
@@ -125,7 +127,10 @@ function App() {
             <PageTransition>
               <AdminDashboard />
             </PageTransition>
-          } />
+          }>
+            <Route index element={<AdminOverview />} />
+            <Route path="users" element={<UsersPage />} />
+          </Route>
         </Routes>
       </AnimatePresence>
     </div >

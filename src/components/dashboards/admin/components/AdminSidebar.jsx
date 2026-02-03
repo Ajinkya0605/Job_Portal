@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const activePage = location.pathname;
@@ -23,7 +23,7 @@ const AdminSidebar = () => {
     ];
 
     return (
-        <aside className="fixed inset-y-0 left-0 w-64 bg-navy-sidebar border-r border-gray-800/50 flex flex-col z-50">
+        <aside className={`fixed inset-y-0 left-0 w-64 bg-navy-sidebar border-r border-gray-800/50 flex flex-col z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             {/* Logo Area */}
             <div
                 className="h-16 flex items-center px-6 border-b border-gray-800/50 cursor-pointer hover:bg-white/5 transition-colors"

@@ -9,8 +9,8 @@ const Features = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 border-b border-white/5 pb-8">
-          <div className="max-w-2xl text-center md:text-left">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 border-b border-white/5 pb-8 text-center md:text-left">
+          <div className="max-w-2xl">
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 font-sans tracking-tight">
               ML-Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Capabilities</span>
             </h2>
@@ -18,7 +18,7 @@ const Features = () => {
               Our platform uses advanced machine learning to ensure every match is authentic, verified, and unbiased.
             </p>
           </div>
-          <button className="text-white hover:text-primary font-bold flex items-center gap-2 transition-colors text-base group px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10">
+          <button className="text-white hover:text-primary font-bold flex items-center gap-2 transition-colors text-base group px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 shrink-0">
             View all features
             <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </button>
