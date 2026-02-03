@@ -31,6 +31,45 @@ const UserEntity = ({ name, type }) => (
     </div>
 );
 
+const MobileTaskCard = ({ task }) => (
+    <div className="bg-[#151A25] border border-gray-800 rounded-xl p-4 mb-4 flex flex-col gap-3 relative overflow-hidden">
+        {/* Top Row: ID + Severity */}
+        <div className="flex justify-between items-start">
+            <span className="text-xs font-bold text-[#33ddff] font-mono">{task.id}</span>
+            <SeverityBadge level={task.severity} />
+        </div>
+
+        {/* User Info */}
+        <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded bg-[#222528] flex items-center justify-center text-gray-400 border border-gray-700 shrink-0">
+                {task.type === 'mobile' ? <Smartphone size={18} /> : <User size={18} />}
+            </div>
+            <div>
+                <p className="font-bold text-sm text-white">{task.user}</p>
+                <p className="text-xs text-gray-500">{task.reason}</p>
+            </div>
+        </div>
+
+        {/* Bottom Row: Time + Action */}
+        <div className="flex items-center justify-between pt-3 border-t border-gray-800">
+            <span className="text-xs font-mono text-gray-400 flex items-center gap-1">
+                <span className="material-symbols-outlined text-[14px]">schedule</span>
+                {task.time}
+            </span>
+
+            {task.action === 'resolve' ? (
+                <button className="px-4 py-1.5 rounded bg-[#33ddff] text-[#0B0B15] text-xs font-bold hover:bg-[#25c4e6] shadow-[0_0_10px_rgba(51,221,255,0.4)] transition-all uppercase">
+                    Resolve
+                </button>
+            ) : (
+                <button className="px-4 py-1.5 rounded bg-gray-700 text-white text-xs font-bold hover:bg-gray-600 border border-gray-600 transition-all uppercase">
+                    Review
+                </button>
+            )}
+        </div>
+    </div>
+);
+
 const PriorityTaskList = () => {
     const tasks = [
         { id: '#9921', user: 'Alex Morgan', type: 'mobile', reason: 'Harassment / Hate Speech', severity: 'CRITICAL', time: '12m 30s', action: 'resolve' },
@@ -40,21 +79,24 @@ const PriorityTaskList = () => {
 
     return (
         <div>
-            <div className="flex items-center gap-3 mb-6">
-                <div className="w-1 h-6 bg-[#33ddff] rounded-full shadow-[0_0_10px_#33ddff]"></div>
-                <h2 className="text-xl font-bold text-white">Priority Task List</h2>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                <div className="flex items-center gap-3">
+                    <div className="w-1 h-6 bg-[#33ddff] rounded-full shadow-[0_0_10px_#33ddff]"></div>
+                    <h2 className="text-xl font-bold text-white">Priority Task List</h2>
+                </div>
 
-                <div className="ml-auto flex gap-2">
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-700 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 transition-colors uppercase">
+                <div className="sm:ml-auto flex gap-2 w-full sm:w-auto">
+                    <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-700 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 transition-colors uppercase">
                         <Filter size={14} /> Filter
                     </button>
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-700 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 transition-colors uppercase">
+                    <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-700 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 transition-colors uppercase">
                         <Download size={14} /> Export
                     </button>
                 </div>
             </div>
 
-            <div className="w-full overflow-x-auto rounded-xl border border-gray-800 bg-[#151A25]">
+            {/* Desktop Table View */}
+            <div className="hidden sm:block w-full overflow-x-auto rounded-xl border border-gray-800 bg-[#151A25]">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="border-b border-gray-800 bg-[#1a1f2e]">
@@ -80,11 +122,11 @@ const PriorityTaskList = () => {
                                 <td className="p-4 text-xs font-mono text-gray-400">{task.time}</td>
                                 <td className="p-4 text-right">
                                     {task.action === 'resolve' ? (
-                                        <button className="px-4 py-1.5 rounded bg-[#33ddff] text-[#0B0B15] text-xs font-bold hover:bg-[#25c4e6] shadow-[0_0_10px_rgba(51,221,255,0.4)] transition-all">
+                                        <button className="px-4 py-1.5 rounded bg-[#33ddff] text-[#0B0B15] text-xs font-bold hover:bg-[#25c4e6] shadow-[0_0_10px_rgba(51,221,255,0.4)] transition-all uppercase">
                                             RESOLVE
                                         </button>
                                     ) : (
-                                        <button className="px-4 py-1.5 rounded bg-gray-700 text-white text-xs font-bold hover:bg-gray-600 border border-gray-600 transition-all">
+                                        <button className="px-4 py-1.5 rounded bg-gray-700 text-white text-xs font-bold hover:bg-gray-600 border border-gray-600 transition-all uppercase">
                                             REVIEW
                                         </button>
                                     )}
@@ -93,6 +135,13 @@ const PriorityTaskList = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="sm:hidden space-y-4">
+                {tasks.map(task => (
+                    <MobileTaskCard key={task.id} task={task} />
+                ))}
             </div>
         </div>
     );

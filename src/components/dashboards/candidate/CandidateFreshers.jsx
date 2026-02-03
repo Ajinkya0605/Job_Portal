@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { JobCard } from './CandidateComponents';
 
 export default function CandidateFreshers() {
+    const { setSidebarOpen } = useOutletContext();
     const [filters, setFilters] = useState({
         batch: [],
         degree: [],
@@ -26,6 +28,12 @@ export default function CandidateFreshers() {
         <>
             <header className="h-20 flex-shrink-0 flex items-center justify-between px-6 border-b border-white/5 bg-[#15171c]/95 backdrop-blur-md relative z-20">
                 <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="lg:hidden text-gray-400 hover:text-white"
+                    >
+                        <span className="material-symbols-outlined">menu</span>
+                    </button>
                     <div className="w-10 h-10 rounded-lg bg-[#1f6b7a]/20 border border-[#1f6b7a]/30 flex items-center justify-center text-[#1f6b7a]">
                         <span className="material-symbols-outlined">school</span>
                     </div>

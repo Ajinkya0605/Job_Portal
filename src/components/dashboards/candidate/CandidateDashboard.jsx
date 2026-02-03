@@ -1,13 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { JobCard, StatCard } from './CandidateComponents';
 
 export default function Dashboard() {
+  const { setSidebarOpen } = useOutletContext();
+
   return (
     <>
       {/* Header */}
       <header className="h-20 flex-shrink-0 flex items-center justify-between px-3 sm:px-6 md:px-8 bg-[#15171c]/95 backdrop-blur-md border-b border-white/5 relative z-20">
-        <div className="w-1/3 min-w-0 flex items-center">
+        <div className="w-1/3 min-w-0 flex items-center gap-3">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="lg:hidden text-gray-400 hover:text-white"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
           <div className="relative hidden md:block group w-full max-w-xs">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#1f6b7a] transition-colors material-symbols-outlined text-[20px]">search</span>
             <input
