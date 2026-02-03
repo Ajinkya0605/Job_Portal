@@ -42,6 +42,11 @@ const StudentProfileBuilder = () => {
 
   // --- SCROLL FUNCTION ---
   const scrollToSection = (id) => {
+    if (id === 'settings') {
+      navigate('/dashboard/candidate/settings');
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       // Offset for sticky header on mobile if needed, or just smooth scroll

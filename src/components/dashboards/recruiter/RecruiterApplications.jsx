@@ -18,27 +18,41 @@ export default function RecruiterApplications() {
 
     const filteredApps = filter === 'All' ? applications : applications.filter(app => app.status === filter);
 
+    const getCount = (status) => {
+        if (status === 'All') return applications.length;
+        return applications.filter(app => app.status === status).length;
+    };
+
     return (
         <>
-            <header className="h-16 flex-shrink-0 flex items-center justify-between px-4 sm:px-6 bg-[#15171c]/95 backdrop-blur-md border-b border-white/5 relative z-20">
-                <div className="flex items-center gap-2">
-                    <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-gray-400 hover:text-white mr-2">
-                        <span className="material-symbols-outlined">menu</span>
-                    </button>
-                    <h1 className="text-lg font-bold text-white tracking-tight">Candidates</h1>
-                    <span className="bg-[#1f6b7a]/20 text-[#1f6b7a] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#1f6b7a]/20">{applications.length} Total</span>
+            <header className="flex flex-col sm:flex-row sm:h-16 items-start sm:items-center justify-between px-4 sm:px-6 py-4 sm:py-0 bg-[#15171c]/95 backdrop-blur-md border-b border-white/5 relative z-20 gap-4 sm:gap-0">
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-start">
+                    <div className="flex items-center gap-2">
+                        <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-gray-400 hover:text-white mr-2">
+                            <span className="material-symbols-outlined">menu</span>
+                        </button>
+                        <h1 className="text-lg font-bold text-white tracking-tight">Candidates</h1>
+                        <span className="hidden sm:inline-block bg-[#1f6b7a]/20 text-[#1f6b7a] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#1f6b7a]/20">{applications.length} Total</span>
+                    </div>
+                    {/* Mobile Only Total Count */}
+                    <span className="sm:hidden text-xs font-bold text-[#1f6b7a]">{applications.length} Applicants</span>
                 </div>
 
-                <div className="flex bg-[#21242c] rounded-lg p-1 border border-white/5">
-                    {['All', 'New', 'Interview', 'Shortlisted'].map(tab => (
-                        <button
-                            key={tab}
-                            onClick={() => setFilter(tab)}
-                            className={`px-3 py-1.5 rounded text-xs font-bold transition-all ${filter === tab ? 'bg-[#1f6b7a] text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
-                        >
-                            {tab}
-                        </button>
-                    ))}
+                <div className="w-full sm:w-auto overflow-x-auto no-scrollbar">
+                    <div className="flex bg-[#21242c] rounded-lg p-1 border border-white/5 w-max">
+                        {['All', 'New', 'Interview', 'Shortlisted'].map(tab => (
+                            <button
+                                key={tab}
+                                onClick={() => setFilter(tab)}
+                                className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-bold transition-all whitespace-nowrap ${filter === tab ? 'bg-[#1f6b7a] text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
+                            >
+                                {tab}
+                                <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${filter === tab ? 'bg-white/20 text-white' : 'bg-[#15171c] text-gray-500 group-hover:bg-[#1a1d23]'}`}>
+                                    {getCount(tab)}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </header>
 
@@ -63,7 +77,7 @@ export default function RecruiterApplications() {
                         ) : (
                             <div className="flex flex-col items-center justify-center h-48 text-gray-500">
                                 <span className="material-symbols-outlined text-4xl mb-2 opacity-20">group_off</span>
-                                <p className="text-sm">No candidates found</p>
+                                <p className="text-sm">No {filter === 'All' ? '' : filter.toLowerCase()} candidates found</p>
                             </div>
                         )}
                     </div>

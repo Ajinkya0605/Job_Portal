@@ -27,33 +27,52 @@ export const StatCard = ({ icon, label, value, trend, trendUp }) => (
 
 // 2. Applicant Row
 export const ApplicantRow = ({ name, role, applied, score, status, statusColor }) => (
-    <div className="flex items-center justify-between p-3 hover:bg-white/5 rounded-lg transition-colors border-b border-white/5 last:border-0 group">
-        <div className="flex items-center gap-3 w-1/3 min-w-[120px]">
-            <div className="w-8 h-8 rounded-full bg-[#1a1d23] border border-white/10 flex items-center justify-center text-[10px] font-bold text-gray-300 group-hover:text-[#1f6b7a] group-hover:border-[#1f6b7a]/30 transition-colors flex-shrink-0">
-                {name.split(' ').map(n => n[0]).join('')}
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-3 hover:bg-white/5 rounded-lg transition-all border-b border-white/5 last:border-0 group cursor-pointer relative">
+        {/* Mobile: Top Row (Avatar + Name + Score) | Desktop: Col 1 */}
+        <div className="flex items-center justify-between w-full sm:w-1/3 min-w-[200px] mb-3 sm:mb-0">
+            <div className="flex items-center gap-3">
+                <div className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-[#1a1d23] border border-white/10 flex items-center justify-center text-xs font-bold text-gray-300 group-hover:text-[#1f6b7a] group-hover:border-[#1f6b7a]/30 transition-colors flex-shrink-0">
+                    {name.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div className="min-w-0">
+                    <p className="text-sm sm:text-xs font-bold text-white truncate group-hover:text-[#1f6b7a] transition-colors">{name}</p>
+                    <p className="text-xs sm:text-[10px] text-gray-500 truncate">{role}</p>
+                </div>
             </div>
-            <div className="min-w-0">
-                <p className="text-xs font-bold text-white truncate">{name}</p>
-                <p className="text-[10px] text-gray-500 truncate">{role}</p>
+
+            {/* Mobile Score Display (Hidden on Desktop) */}
+            <div className="sm:hidden flex flex-col items-end">
+                <span className="text-base font-extrabold text-[#1f6b7a]">{score}%</span>
+                <span className="text-[9px] text-gray-600 font-bold uppercase">Match</span>
             </div>
         </div>
 
-        <div className="hidden sm:block w-1/6 text-[10px] text-gray-400">{applied}</div>
-
-        <div className="w-1/4 sm:w-1/4">
-            <span className={`inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold border ${statusColor}`}>
-                <span className={`w-1 h-1 rounded-full mr-1.5 ${statusColor.replace('text-', 'bg-').replace('border-', '')}`}></span>
+        {/* Mobile: Middle Row (Status) | Desktop: Col 3 */}
+        <div className="w-full sm:w-1/4 mb-3 sm:mb-0">
+            <span className={`inline-flex items-center px-2.5 py-1 sm:px-2 sm:py-0.5 rounded text-[10px] font-bold border ${statusColor}`}>
+                <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${statusColor.replace('text-', 'bg-').replace('border-', '')}`}></span>
                 {status}
             </span>
         </div>
 
-        <div className="w-1/6 text-right">
-            <span className="text-xs font-extrabold text-[#1f6b7a]">{score}%</span>
+        {/* Mobile: Bottom Row (Applied) | Desktop: Col 2 */}
+        <div className="flex items-center justify-between sm:block w-full sm:w-1/6 text-xs sm:text-[10px] text-gray-400">
+            <span className="sm:hidden text-gray-600 font-bold uppercase text-[9px]">Applied</span>
+            <span>{applied}</span>
         </div>
 
+        {/* Desktop Score Display (Hidden on Mobile) */}
+        <div className="hidden sm:flex w-1/6 items-center gap-2">
+            <div className="flex-1 h-1.5 bg-[#1a1d23] rounded-full overflow-hidden">
+                <div className="h-full bg-[#1f6b7a] rounded-full" style={{ width: `${score}%` }}></div>
+            </div>
+            <span className="text-xs font-bold text-[#1f6b7a] w-8 text-right">{score}%</span>
+        </div>
+
+        {/* Menu (Desktop Only for cleanliness, or mobile absolute if needed, but row is clickable) */}
         <div className="hidden sm:block w-10 text-right">
-            <button className="text-gray-500 hover:text-white">
-                <span className="material-symbols-outlined text-[16px]">more_vert</span>
+            <button className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/10 transition-colors">
+                <span className="material-symbols-outlined text-[18px]">more_vert</span>
             </button>
         </div>
     </div>

@@ -54,14 +54,14 @@ const Hero = () => {
           <Link to="/auth">
             <button className="group relative px-8 py-4 bg-primary text-white font-bold rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(31,107,122,0.6)]">
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <div className="relative flex items-center gap-2">
+              <div className="relative flex items-center justify-center gap-2">
                 <span className="material-symbols-outlined">rocket_launch</span>
                 <span>Start Hiring Now</span>
               </div>
             </button>
           </Link>
-          <Link to="/auth">
-            <button className="group px-8 py-4 bg-white/5 text-white font-bold rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all hover:scale-105 backdrop-blur-sm flex items-center gap-2">
+          <Link to="/auth" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto group px-8 py-4 bg-white/5 text-white font-bold rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all hover:scale-105 backdrop-blur-sm flex items-center justify-center gap-2">
               <span className="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">search</span>
               <span>Find a Job</span>
             </button>

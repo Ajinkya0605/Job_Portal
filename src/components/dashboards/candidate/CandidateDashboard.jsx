@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { JobCard, StatCard } from './CandidateComponents';
 
 export default function Dashboard() {
@@ -21,7 +22,14 @@ export default function Dashboard() {
           <p className="text-[11px] text-gray-400 hidden sm:block truncate">Here's what's happening today</p>
         </div>
         {/* Removed notification icon */}
-        <div className="w-1/3 flex justify-end items-center gap-3"></div>
+        <div className="w-1/3 flex justify-end items-center gap-3">
+          <Link to="/dashboard/candidate/settings" className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white rounded-lg bg-[#1a1d23] border border-white/5 hover:border-white/10 transition-all">
+            <span className="material-symbols-outlined text-[18px]">settings</span>
+          </Link>
+          <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white rounded-lg bg-[#1a1d23] border border-white/5 hover:border-white/10 transition-all">
+            <span className="material-symbols-outlined text-[18px]">notifications</span>
+          </button>
+        </div>
       </header>
 
       {/* Dashboard Body - Adjusted Layout & Spacing */}

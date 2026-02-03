@@ -86,10 +86,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                             <span className="material-symbols-outlined text-[20px] group-hover:text-[#1f6b7a] transition-colors">person</span>
                             Profile
                         </Link>
-                        <a href="#" className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
+                        <Link to="/dashboard/candidate/settings" onClick={onClose} className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all group">
                             <span className="material-symbols-outlined text-[20px] group-hover:text-[#1f6b7a] transition-colors">settings</span>
                             Settings
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@ export default function CandidateLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="fixed inset-0 z-50 flex w-screen h-screen bg-[#15171c] text-white font-sans overflow-hidden selection:bg-[#1f6b7a] selection:text-white">
+        <div className="fixed inset-0 z-50 flex flex-col lg:flex-row w-screen h-screen bg-[#15171c] text-white font-sans overflow-hidden selection:bg-[#1f6b7a] selection:text-white">
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             <button
@@ -129,7 +129,7 @@ export default function CandidateLayout() {
                 <span className="material-symbols-outlined text-2xl text-white">menu</span>
             </button>
 
-            <div className="flex-1 flex flex-col h-full relative bg-[#15171c] ml-0 lg:ml-0">
+            <div className="flex-1 flex flex-col w-full min-w-0 h-full relative bg-[#15171c] ml-0 lg:ml-0">
                 <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30"
                     style={{ background: 'radial-gradient(circle at 60% 40%, rgba(76, 29, 149, 0.15) 0%, rgba(31, 107, 122, 0.1) 40%, rgba(21, 23, 28, 0) 70%)' }}>
                 </div>
