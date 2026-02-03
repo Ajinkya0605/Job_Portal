@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Search, Bell, ShieldCheck } from 'lucide-react';
 
-const AdminHeader = ({ onMenuClick }) => {
+const AdminHeader = ({ onMenuClick, title }) => {
     return (
         <header className="h-16 border-b border-gray-800/50 bg-[#0B0B15] px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
 
@@ -16,7 +16,7 @@ const AdminHeader = ({ onMenuClick }) => {
 
                 <div className="flex items-center gap-4">
                     <h1 className="text-lg font-bold text-white flex items-center gap-2">
-                        Moderation <span className="hidden sm:inline">Console</span>
+                        {title || "Moderation"} <span className="hidden sm:inline">{!title ? "Console" : ""}</span>
                     </h1>
                     <div className="hidden sm:block h-4 w-px bg-gray-700"></div>
                     <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-green-500 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
