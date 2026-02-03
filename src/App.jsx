@@ -16,10 +16,12 @@ import CandidateFreshers from './components/dashboards/candidate/CandidateFreshe
 import CandidateMessages from './components/dashboards/candidate/CandidateMessages'; // New Page
 import CandidateApplications from './components/dashboards/candidate/CandidateApplications'; // New Page
 import CandidateProfileBuilder from './components/dashboards/candidate/CandidateProfileBuilder';
+import CandidateSettings from './components/dashboards/candidate/CandidateSettings';
 import RecruiterLayout from './components/dashboards/recruiter/RecruiterLayout'; // New Layout
 import RecruiterDashboard from './components/dashboards/recruiter/RecruiterDashboard';
 import RecruiterApplications from './components/dashboards/recruiter/RecruiterApplications'; // New Page
 import RecruiterJobs from './components/dashboards/recruiter/RecruiterJobs'; // New Page
+import RecruiterSettings from './components/dashboards/recruiter/RecruiterSettings'; // New Page
 import PostJob from './components/dashboards/recruiter/PostJob';
 import AdminDashboard from './components/dashboards/admin/AdminDashboard';
 
@@ -72,6 +74,11 @@ function App() {
                   <CandidateApplications />
                 </PageTransition>
               } />
+              <Route path="settings" element={
+                <PageTransition>
+                  <CandidateSettings />
+                </PageTransition>
+              } />
             </Route>
 
             {/* Standalone routes (own layout) */}
@@ -81,6 +88,8 @@ function App() {
               </PageTransition>
             } />
           </Route>
+
+
 
           {/* Recruiter Routes */}
           <Route path="/dashboard/recruiter" element={<RecruiterLayout />}>
@@ -104,6 +113,11 @@ function App() {
                 <RecruiterApplications />
               </PageTransition>
             } />
+            <Route path="settings" element={
+              <PageTransition>
+                <RecruiterSettings />
+              </PageTransition>
+            } />
           </Route>
 
           {/* Admin Routes */}
@@ -114,7 +128,7 @@ function App() {
           } />
         </Routes>
       </AnimatePresence>
-    </div>
+    </div >
   );
 }
 
