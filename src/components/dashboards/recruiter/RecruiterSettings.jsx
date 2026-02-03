@@ -1,246 +1,153 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import {
-    CreditCard, Users, Link, FileText, Plus, MoreHorizontal,
+    CreditCard, Users, FileText, Plus, MoreHorizontal,
     CheckCircle2, AlertCircle, Trash2, Save, Download,
     Building2, Bell, Mail, Globe, MapPin, Upload, Search
 } from 'lucide-react';
 
+/* ---------------- MAIN PAGE ---------------- */
+
 export default function RecruiterSettings() {
+    const { setIsSidebarOpen } = useOutletContext();
     const [activeTab, setActiveTab] = useState('general');
 
-    return (
-        <div className="flex-1 w-full min-w-0 overflow-y-auto overflow-x-hidden bg-[#15171c] relative z-10 custom-scrollbar">
-            <div className="w-full max-w-full xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-6 space-y-8 pb-20">
-
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                        <h1 className="text-2xl font-bold text-white tracking-tight">Organization Settings</h1>
-                        <p className="text-gray-400 text-sm mt-1">Manage your company profile, team, and preferences.</p>
-                    </div>
-                </div>
-
-                {/* Tabs */}
-                <div className="flex border-b border-white/10 overflow-x-auto custom-scrollbar gap-2 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-                    {[
-                        { id: 'general', label: 'General', icon: Building2 },
-                        { id: 'team', label: 'Team', icon: Users },
-                        { id: 'notifications', label: 'Notifications', icon: Bell },
-                        { id: 'templates', label: 'Templates', icon: Mail },
-                        { id: 'billing', label: 'Billing', icon: CreditCard },
-                        { id: 'integrations', label: 'Integrations', icon: Link },
-                    ].map(tab => {
-                        const Icon = tab.icon;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-2 px-4 py-3 text-sm font-bold capitalize transition-all border-b-2 whitespace-nowrap flex-shrink-0 ${activeTab === tab.id
-                                    ? 'border-[#1f6b7a] text-[#1f6b7a]'
-                                    : 'border-transparent text-gray-500 hover:text-white hover:border-white/20'
-                                    }`}
-                            >
-                                <Icon size={16} />
-                                {tab.label}
-                            </button>
-                        );
-                    })}
-                </div>
-
-                {/* Content Area */}
-                <div className="min-h-[400px] animate-fade-in-up">
-                    {activeTab === 'general' && <GeneralSection />}
-                    {activeTab === 'team' && <TeamSection />}
-                    {activeTab === 'notifications' && <NotificationsSection />}
-                    {activeTab === 'templates' && <TemplatesSection />}
-                    {activeTab === 'billing' && <BillingSection />}
-                    {activeTab === 'integrations' && <IntegrationsSection />}
-                </div>
-
-            </div>
-        </div>
-    );
-}
-
-// --- General Section (Company Branding) ---
-const GeneralSection = () => {
-    return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Col: Logo & Basic Info */}
-            <div className="lg:col-span-2 space-y-6">
-                <div className="p-4 sm:p-6 rounded-xl bg-[#1a1d23] border border-white/5 space-y-6">
-                    <h3 className="text-lg font-bold text-white">Company Profile</h3>
-
-                    {/* Logo Upload */}
-                    <div className="flex items-center gap-6">
-                        <div className="w-24 h-24 rounded-xl bg-[#21242c] border-2 border-dashed border-gray-700 flex flex-col items-center justify-center text-gray-500 hover:border-[#1f6b7a] hover:text-[#1f6b7a] transition-all cursor-pointer group">
-                            <Upload size={24} className="mb-2 group-hover:scale-110 transition-transform" />
-                            <span className="text-[10px] font-bold uppercase">Upload Logo</span>
-                        </div>
-                        <div className="flex-1">
-                            <h4 className="text-sm font-bold text-white">Company Logo</h4>
-                            <p className="text-xs text-gray-400 mt-1 mb-3">Recommended size: 400x400px. JPG or PNG.</p>
-                            <div className="flex gap-2">
-                                <button className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold border border-white/10 transition-colors">
-                                    Change
-                                </button>
-                                <button className="px-3 py-1.5 rounded-lg hover:bg-red-500/10 text-red-400 text-xs font-bold transition-colors">
-                                    Remove
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Form Fields */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500">Company Name</label>
-                            <input type="text" defaultValue="TechCorp Inc." className="w-full bg-[#0f1115] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] focus:outline-none transition-colors" />
-                        </div>
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500">Industry</label>
-                            <input type="text" defaultValue="Software Development" className="w-full bg-[#0f1115] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] focus:outline-none transition-colors" />
-                        </div>
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500">Website</label>
-                            <div className="relative">
-                                <Globe size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-                                <input type="text" defaultValue="https://techcorp.com" className="w-full bg-[#0f1115] border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] focus:outline-none transition-colors" />
-                            </div>
-                        </div>
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500">Location</label>
-                            <div className="relative">
-                                <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-                                <input type="text" defaultValue="San Francisco, CA" className="w-full bg-[#0f1115] border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] focus:outline-none transition-colors" />
-                            </div>
-                        </div>
-                        <div className="sm:col-span-2 space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500">Description</label>
-                            <textarea rows="4" className="w-full bg-[#0f1115] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] focus:outline-none transition-colors resize-none" defaultValue="Leading the way in innovative tech solutions..."></textarea>
-                        </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-white/5 flex justify-end">
-                        <button className="flex items-center gap-2 px-6 py-2.5 bg-[#1f6b7a] hover:bg-[#2a8a9c] text-white text-sm font-bold rounded-lg transition-colors shadow-lg shadow-[#1f6b7a]/20">
-                            <Save size={16} />
-                            Save Changes
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Right Col: Social & Branding Preview */}
-            <div className="space-y-6">
-                <div className="p-4 sm:p-6 rounded-xl bg-[#1a1d23] border border-white/5 space-y-4">
-                    <h3 className="text-sm font-bold text-white">Social Links</h3>
-                    <div className="space-y-3">
-                        {['LinkedIn', 'Twitter', 'Facebook', 'Instagram'].map(social => (
-                            <div key={social} className="flex items-center gap-3">
-                                <span className="text-xs font-bold text-gray-500 w-20">{social}</span>
-                                <input type="text" placeholder={`Add ${social} link`} className="flex-1 bg-[#0f1115] border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:border-[#1f6b7a] focus:outline-none transition-colors" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-// --- Notifications Section ---
-const NotificationsSection = () => {
-    return (
-        <div className="max-w-3xl space-y-6">
-            <div className="p-4 sm:p-6 rounded-xl bg-[#1a1d23] border border-white/5">
-                <h3 className="text-lg font-bold text-white mb-1">Email Notifications</h3>
-                <p className="text-xs text-gray-400 mb-6">Choose what you want to be notified about.</p>
-
-                <div className="space-y-6">
-                    <NotificationToggle
-                        title="New Hires & Applications"
-                        desc="Get notified when a candidate applies to a job or moves stages."
-                        checked={true}
-                    />
-                    <NotificationToggle
-                        title="Candidate Messages"
-                        desc="Receive an email when a candidate replies to your message."
-                        checked={true}
-                    />
-                    <NotificationToggle
-                        title="Job Post Status"
-                        desc="Alerts when a job post expires or is approved."
-                        checked={false}
-                    />
-                    <NotificationToggle
-                        title="Weekly Digest"
-                        desc="A summary of your team's innovative hiring performance."
-                        checked={true}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const NotificationToggle = ({ title, desc, checked }) => {
-    const [isOn, setIsOn] = useState(checked);
-    return (
-        <div className="flex items-start justify-between">
-            <div>
-                <h4 className="text-sm font-bold text-white">{title}</h4>
-                <p className="text-xs text-gray-500 mt-0.5">{desc}</p>
-            </div>
-            <button
-                onClick={() => setIsOn(!isOn)}
-                className={`w-12 h-6 rounded-full relative transition-colors duration-300 ${isOn ? 'bg-[#1f6b7a]' : 'bg-[#2a2d36]'}`}
-            >
-                <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-all duration-300 ${isOn ? 'left-7' : 'left-1'}`}></div>
-            </button>
-        </div>
-    );
-};
-
-// --- Templates Section ---
-const TemplatesSection = () => {
-    const templates = [
-        { id: 1, name: "Initial Interview Invite", subject: "Invitation to Interview at TechCorp", type: "Email" },
-        { id: 2, name: "Standard Rejection", subject: "Update on your application", type: "Email" },
-        { id: 3, name: "Offer Letter", subject: "Offer of Employment", type: "Document" },
-        { id: 4, name: "Technical Assessment", subject: "Coding Challenge Link", type: "Email" },
+    const tabs = [
+        { id: 'general', label: 'General', icon: Building2 },
+        { id: 'team', label: 'Team', icon: Users },
+        { id: 'notifications', label: 'Notifications', icon: Bell },
+        { id: 'templates', label: 'Templates', icon: Mail },
+        { id: 'billing', label: 'Billing', icon: CreditCard },
     ];
 
     return (
-        <div className="space-y-6">
-            <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-white">Message Templates</h3>
-                <button className="flex items-center gap-2 px-4 py-2 bg-[#1f6b7a] hover:bg-[#2a8a9c] text-white text-xs font-bold rounded-lg transition-colors shadow-lg shadow-[#1f6b7a]/20">
-                    <Plus size={16} />
-                    Create Template
-                </button>
-            </div>
+        <>
+            {/* Header */}
+            <header className="h-16 flex items-center justify-between px-4 sm:px-6 bg-[#15171c]/95 backdrop-blur-md border-b border-white/5">
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="lg:hidden text-gray-400 hover:text-white"
+                    >
+                        <span className="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 className="text-lg font-bold text-white">
+                        Organization Settings
+                    </h1>
+                </div>
+            </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {templates.map(tpl => (
-                    <div key={tpl.id} className="p-4 rounded-xl bg-[#1a1d23] border border-white/5 hover:border-[#1f6b7a]/50 transition-all group cursor-pointer">
-                        <div className="flex justify-between items-start mb-3">
-                            <div className="p-2 rounded-lg bg-[#21242c] text-[#1f6b7a] group-hover:bg-[#1f6b7a] group-hover:text-white transition-colors">
-                                <FileText size={20} />
-                            </div>
-                            <button className="text-gray-500 hover:text-white">
-                                <MoreHorizontal size={18} />
+            <div className="flex-1 overflow-y-auto bg-[#15171c] custom-scrollbar">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-8 pb-20">
+
+                    {/* Tabs */}
+                    <div className="flex gap-6 border-b border-white/10 overflow-x-auto">
+                        {tabs.map(tab => {
+                            const Icon = tab.icon;
+                            const active = activeTab === tab.id;
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`flex items-center gap-2 pb-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap
+                    ${active
+                                            ? 'border-[#1f6b7a] text-[#1f6b7a]'
+                                            : 'border-transparent text-gray-500 hover:text-white hover:border-white/20'
+                                        }`}
+                                >
+                                    <Icon size={16} />
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* Content */}
+                    <div className="animate-fade-in-up">
+                        {activeTab === 'general' && <GeneralSection />}
+                        {activeTab === 'team' && <TeamSection />}
+                        {activeTab === 'notifications' && <NotificationsSection />}
+                        {activeTab === 'templates' && <TemplatesSection />}
+                        {activeTab === 'billing' && <BillingSection />}
+                    </div>
+
+                </div>
+            </div>
+        </>
+    );
+}
+
+/* ---------------- GENERAL ---------------- */
+
+const GeneralSection = () => {
+    return (
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            {/* Main */}
+            <div className="xl:col-span-2 p-6 bg-[#1a1d23] border border-white/5 rounded-xl space-y-6">
+                <h3 className="text-lg font-bold text-white">Company Profile</h3>
+
+                {/* Logo */}
+                <div className="flex flex-col sm:flex-row gap-6">
+                    <div className="w-24 h-24 rounded-xl bg-[#21242c] border-2 border-dashed border-gray-700 flex flex-col items-center justify-center text-gray-500 hover:border-[#1f6b7a] hover:text-[#1f6b7a] transition cursor-pointer">
+                        <Upload size={22} />
+                        <span className="text-[10px] font-bold mt-1">UPLOAD LOGO</span>
+                    </div>
+                    <div>
+                        <p className="text-sm font-bold text-white">Company Logo</p>
+                        <p className="text-xs text-gray-400 mb-3">
+                            Recommended size: 400×400 PNG/JPG
+                        </p>
+                        <div className="flex gap-2">
+                            <button className="px-3 py-1.5 text-xs bg-white/5 border border-white/10 rounded-lg">
+                                Change
+                            </button>
+                            <button className="px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/10 rounded-lg">
+                                Remove
                             </button>
                         </div>
-                        <h4 className="text-sm font-bold text-white mb-1">{tpl.name}</h4>
-                        <p className="text-xs text-gray-500 border-l-2 border-white/10 pl-2 italic">Subject: {tpl.subject}</p>
                     </div>
+                </div>
+
+                {/* Form */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input label="Company Name" value="TechCorp Inc." />
+                    <Input label="Industry" value="Software Development" />
+                    <Input label="Website" value="https://techcorp.com" icon={Globe} />
+                    <Input label="Location" value="San Francisco, CA" icon={MapPin} />
+                    <div className="sm:col-span-2">
+                        <label className="text-xs font-bold text-gray-500">Description</label>
+                        <textarea
+                            rows="4"
+                            className="w-full mt-1 bg-[#0f1115] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] outline-none resize-none"
+                            defaultValue="Leading the way in innovative tech solutions..."
+                        />
+                    </div>
+                </div>
+
+                <div className="pt-4 border-t border-white/5 flex justify-end">
+                    <button className="flex items-center gap-2 px-6 py-2.5 bg-[#1f6b7a] hover:bg-[#2a8a9c] rounded-lg text-sm font-bold text-white">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+
+            {/* Social */}
+            <div className="p-6 bg-[#1a1d23] border border-white/5 rounded-xl space-y-4">
+                <h3 className="text-sm font-bold text-white">Social Links</h3>
+                {['LinkedIn', 'Twitter', 'Facebook', 'Instagram'].map(s => (
+                    <input
+                        key={s}
+                        placeholder={`Add ${s} link`}
+                        className="w-full bg-[#0f1115] border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:border-[#1f6b7a] outline-none"
+                    />
                 ))}
             </div>
         </div>
     );
 };
 
-// --- Team Section ---
+/* ---------------- TEAM (Restored) ---------------- */
+
 const TeamSection = () => {
     const users = [
         { id: 1, name: "Alex Morgan", email: "alex@techcorp.com", role: "Owner", status: "Active", avatar: "AM" },
@@ -313,7 +220,94 @@ const TeamSection = () => {
     );
 };
 
-// --- Billing Section ---
+/* ---------------- NOTIFICATIONS ---------------- */
+
+const NotificationsSection = () => {
+    return (
+        <div className="max-w-3xl bg-[#1a1d23] border border-white/5 rounded-xl p-6 space-y-6">
+            <div>
+                <h3 className="text-lg font-bold text-white">Email Notifications</h3>
+                <p className="text-xs text-gray-400">
+                    Choose what you want to be notified about.
+                </p>
+            </div>
+
+            {[
+                ['New Hires & Applications', 'Candidate applies or moves stage'],
+                ['Candidate Messages', 'Replies to your messages'],
+                ['Job Post Status', 'Post approved or expired'],
+                ['Weekly Digest', 'Weekly hiring summary'],
+            ].map(([title, desc]) => (
+                <NotificationToggle key={title} title={title} desc={desc} />
+            ))}
+        </div>
+    );
+};
+
+const NotificationToggle = ({ title, desc }) => {
+    const [on, setOn] = useState(true);
+    return (
+        <div className="flex justify-between items-start gap-4">
+            <div>
+                <p className="text-sm font-bold text-white">{title}</p>
+                <p className="text-xs text-gray-500">{desc}</p>
+            </div>
+            <button
+                onClick={() => setOn(!on)}
+                className={`w-12 h-6 rounded-full relative transition-colors ${on ? 'bg-[#1f6b7a]' : 'bg-[#2a2d36]'
+                    }`}
+            >
+                <span
+                    className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${on ? 'left-7' : 'left-1'
+                        }`}
+                />
+            </button>
+        </div>
+    );
+};
+
+/* ---------------- TEMPLATES (Restored) ---------------- */
+
+const TemplatesSection = () => {
+    const templates = [
+        { id: 1, name: "Initial Interview Invite", subject: "Invitation to Interview at TechCorp", type: "Email" },
+        { id: 2, name: "Standard Rejection", subject: "Update on your application", type: "Email" },
+        { id: 3, name: "Offer Letter", subject: "Offer of Employment", type: "Document" },
+        { id: 4, name: "Technical Assessment", subject: "Coding Challenge Link", type: "Email" },
+    ];
+
+    return (
+        <div className="space-y-6">
+            <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-white">Message Templates</h3>
+                <button className="flex items-center gap-2 px-4 py-2 bg-[#1f6b7a] hover:bg-[#2a8a9c] text-white text-xs font-bold rounded-lg transition-colors shadow-lg shadow-[#1f6b7a]/20">
+                    <Plus size={16} />
+                    Create Template
+                </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {templates.map(tpl => (
+                    <div key={tpl.id} className="p-4 rounded-xl bg-[#1a1d23] border border-white/5 hover:border-[#1f6b7a]/50 transition-all group cursor-pointer">
+                        <div className="flex justify-between items-start mb-3">
+                            <div className="p-2 rounded-lg bg-[#21242c] text-[#1f6b7a] group-hover:bg-[#1f6b7a] group-hover:text-white transition-colors">
+                                <FileText size={20} />
+                            </div>
+                            <button className="text-gray-500 hover:text-white">
+                                <MoreHorizontal size={18} />
+                            </button>
+                        </div>
+                        <h4 className="text-sm font-bold text-white mb-1">{tpl.name}</h4>
+                        <p className="text-xs text-gray-500 border-l-2 border-white/10 pl-2 italic">Subject: {tpl.subject}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+/* ---------------- BILLING (Restored) ---------------- */
+
 const BillingSection = () => {
     return (
         <div className="space-y-6">
@@ -416,63 +410,23 @@ const BillingSection = () => {
     );
 };
 
-// --- Integrations Section ---
-const IntegrationsSection = () => {
-    return (
-        <div className="space-y-6">
-            <h3 className="text-lg font-bold text-white">Connected Apps</h3>
-            <div className="grid grid-cols-1 gap-4">
-                {[
-                    { name: 'Greenhouse', icon: 'G', desc: 'Sync candidates and job postings automatically.', connected: true },
-                    { name: 'Lever', icon: 'L', desc: 'Streamline your hiring workflow with Lever integration.', connected: false },
-                    { name: 'Slack', icon: '#', desc: 'Get instant notifications for new applications and messages.', connected: false }
-                ].map((app, i) => (
-                    <div key={i} className={`p-5 rounded-xl border transition-all ${app.connected ? 'bg-[#1a1d23] border-[#1f6b7a]/40 bg-gradient-to-r from-[#1f6b7a]/5 to-transparent' : 'bg-[#1a1d23] border-white/5'}`}>
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                            <div className="flex items-center gap-4">
-                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold border ${app.connected ? 'bg-[#1f6b7a] text-white border-[#1f6b7a]' : 'bg-[#15171c] text-gray-500 border-white/10'}`}>
-                                    {app.icon}
-                                </div>
-                                <div>
-                                    <h4 className="text-base font-bold text-white flex items-center gap-2">
-                                        {app.name}
-                                        {app.connected && <span className="text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded-full uppercase tracking-wide">Connected</span>}
-                                    </h4>
-                                    <p className="text-xs text-gray-400 mt-0.5">{app.desc}</p>
-                                </div>
-                            </div>
+/* ---------------- SMALL INPUT ---------------- */
 
-                            <div className="flex items-center gap-3 w-full sm:w-auto">
-                                <label className="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" className="sr-only peer" checked={app.connected} readOnly />
-                                    <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1f6b7a]"></div>
-                                </label>
-                            </div>
-                        </div>
-
-                        {app.connected && (
-                            <div className="mt-4 pl-0 sm:pl-16 animate-fade-in-down">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        API Key
-                                    </label>
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="password"
-                                            value="sk_live_5123456789abcdef"
-                                            readOnly
-                                            className="flex-1 bg-[#0f1115] border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 font-mono focus:outline-none"
-                                        />
-                                        <button className="px-3 py-2 bg-[#1f6b7a]/10 hover:bg-[#1f6b7a]/20 text-[#1f6b7a] rounded-lg border border-[#1f6b7a]/20 text-xs font-bold transition-colors">
-                                            Regenerate
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
+const Input = ({ label, value, icon: Icon }) => (
+    <div>
+        <label className="text-xs font-bold text-gray-500">{label}</label>
+        <div className="relative mt-1">
+            {Icon && (
+                <Icon
+                    size={16}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                />
+            )}
+            <input
+                defaultValue={value}
+                className={`w-full bg-[#0f1115] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-[#1f6b7a] outline-none ${Icon ? 'pl-10' : ''
+                    }`}
+            />
         </div>
-    );
-};
+    </div>
+);

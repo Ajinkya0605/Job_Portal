@@ -112,16 +112,6 @@ export default function RecruiterLayout() {
             {/* Sidebar */}
             <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-            {/* Mobile Menu Button */}
-            <button
-                className="fixed top-4 right-4 z-[60] flex items-center justify-center w-10 h-10 bg-[#21242c] rounded-lg border border-white/10 lg:hidden hover:bg-[#1a1d23]/80 transition-colors focus:outline-none shadow"
-                style={{ WebkitTapHighlightColor: 'transparent' }}
-                aria-label="Open sidebar"
-                onClick={() => setIsSidebarOpen(true)}
-            >
-                <span className="material-symbols-outlined text-2xl text-white">menu</span>
-            </button>
-
             {/* Main Content */}
             <div className="flex-1 flex flex-col w-full min-w-0 h-full relative bg-[#15171c]">
                 {/* Ambient Glow */}
