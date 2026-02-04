@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 import {
     Inbox,
     Filter,
@@ -18,8 +17,6 @@ import {
     History,
     Smile
 } from 'lucide-react';
-import AdminSidebar from './components/AdminSidebar';
-import AdminHeader from './components/AdminHeader';
 
 // --- Mock Data ---
 

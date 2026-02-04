@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 import {
     ShieldAlert, AlertTriangle, CheckCircle, Smartphone, User,
     FileText, Zap, Search, Filter, ChevronLeft, Flag, ExternalLink,
     AlertOctagon, Check, X
 } from 'lucide-react';
-import AdminSidebar from './components/AdminSidebar';
-import AdminHeader from './components/AdminHeader';
 
 // --- Components ---
 

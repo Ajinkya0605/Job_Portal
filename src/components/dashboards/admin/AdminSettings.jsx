@@ -1,89 +1,60 @@
 import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 import {
     Users, Shield, Settings, Database, CreditCard, Activity,
     Search, MoreHorizontal, UserCheck, AlertTriangle, Lock,
     CheckCircle2, XCircle, Plus, Edit2, Server, Globe
 } from 'lucide-react';
-import AdminSidebar from './components/AdminSidebar';
-import AdminHeader from './components/AdminHeader';
 
 /* ============================
    MAIN PAGE
 ============================ */
 export default function AdminSettings() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('users');
 
-    const sidebarProps = useOutletContext();
-    // If AdminSettings is used as a standalone route wrapped in layout vs direct child
-    // In current project structure, Admin pages seem to handle layout themselves or through parent.
-    // Based on AdminDashboard, it manages its own layout shell. We will replicate that pattern.
-    // NOTE: If sidebar props are missing (direct route), we manage locally.
-
     return (
-        <div className="min-h-screen bg-[#0B0B15] font-sans selection:bg-[#33ddff] selection:text-[#0B0B15] text-gray-200 flex flex-col lg:flex-row overflow-hidden">
-            <AdminSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} activePage="Settings" />
+        <div className="h-full flex flex-col min-h-0 bg-[#0B0B15]">
+            <div className="flex-1 overflow-y-auto z-10 custom-scrollbar">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-            {/* Mobile Overlay */}
-            {isSidebarOpen && (
-                <div
-                    className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm"
-                    onClick={() => setIsSidebarOpen(false)}
-                />
-            )}
-
-            <main className="flex-1 min-h-screen flex flex-col relative w-full min-w-0 lg:ml-64 transition-all duration-300">
-                <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
-                    <div className="absolute top-[-20%] left-[20%] w-[500px] h-[500px] bg-[#33ddff]/5 rounded-full blur-[120px]"></div>
-                    <div className="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px]"></div>
-                </div>
-
-                <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} title="Platform Settings" />
-
-                <div className="flex-1 overflow-y-auto z-10 custom-scrollbar bg-[#0B0B15]">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
-                        {/* Tabs */}
-                        <div className="flex gap-4 border-b border-gray-800 overflow-x-auto pb-1 custom-scrollbar">
-                            {[
-                                { id: 'users', label: 'User Management', icon: Users },
-                                { id: 'platform', label: 'Platform Config', icon: Settings },
-                                { id: 'content', label: 'Taxonomy', icon: Database },
-                                { id: 'billing', label: 'Billing', icon: CreditCard },
-                                { id: 'logs', label: 'System Health', icon: Activity },
-                            ].map(tab => {
-                                const Icon = tab.icon;
-                                const active = activeTab === tab.id;
-                                return (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-all whitespace-nowrap
+                    {/* Tabs */}
+                    <div className="flex gap-4 border-b border-gray-800 overflow-x-auto pb-1 custom-scrollbar">
+                        {[
+                            { id: 'users', label: 'User Management', icon: Users },
+                            { id: 'platform', label: 'Platform Config', icon: Settings },
+                            { id: 'content', label: 'Taxonomy', icon: Database },
+                            { id: 'billing', label: 'Billing', icon: CreditCard },
+                            { id: 'logs', label: 'System Health', icon: Activity },
+                        ].map(tab => {
+                            const Icon = tab.icon;
+                            const active = activeTab === tab.id;
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-all whitespace-nowrap
                                             ${active
-                                                ? 'border-[#33ddff] text-[#33ddff] bg-[#33ddff]/5'
-                                                : 'border-transparent text-gray-400 hover:text-white hover:border-gray-700'
-                                            }`}
-                                    >
-                                        <Icon size={16} />
-                                        {tab.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-
-                        {/* Content Area */}
-                        <div className="min-h-[500px] animate-fade-in-up pb-20">
-                            {activeTab === 'users' && <UserManagementSection />}
-                            {activeTab === 'platform' && <PlatformConfigSection />}
-                            {activeTab === 'content' && <TaxonomySection />}
-                            {activeTab === 'billing' && <BillingSection />}
-                            {activeTab === 'logs' && <SystemHealthSection />}
-                        </div>
-
+                                            ? 'border-[#33ddff] text-[#33ddff] bg-[#33ddff]/5'
+                                            : 'border-transparent text-gray-400 hover:text-white hover:border-gray-700'
+                                        }`}
+                                >
+                                    <Icon size={16} />
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
                     </div>
+
+                    {/* Content Area */}
+                    <div className="min-h-[500px] animate-fade-in-up pb-20">
+                        {activeTab === 'users' && <UserManagementSection />}
+                        {activeTab === 'platform' && <PlatformConfigSection />}
+                        {activeTab === 'content' && <TaxonomySection />}
+                        {activeTab === 'billing' && <BillingSection />}
+                        {activeTab === 'logs' && <SystemHealthSection />}
+                    </div>
+
                 </div>
-            </main>
+            </div>
         </div>
     );
 }
@@ -392,7 +363,7 @@ const SystemHealthSection = () => {
                     ].map((log, i) => (
                         <div key={i} className="flex gap-4 p-3 rounded-lg border border-gray-800/50 bg-[#0B0B15]">
                             <div className={`w-1 h-full rounded-full ${log.type === 'critical' ? 'bg-red-500' :
-                                    log.type === 'warn' ? 'bg-yellow-400' : 'bg-blue-500'
+                                log.type === 'warn' ? 'bg-yellow-400' : 'bg-blue-500'
                                 }`}></div>
                             <div className="flex-1">
                                 <p className="text-sm font-bold text-white mb-0.5">{log.action}</p>
@@ -437,10 +408,10 @@ const HealthMetric = ({ label, value, status }) => (
     <div className="bg-[#151A25] border border-gray-800 rounded-xl p-4 flex flex-col items-center justify-center text-center">
         <p className="text-[10px] font-bold text-gray-500 uppercase mb-1">{label}</p>
         <p className={`text-lg font-bold ${status === 'good' ? 'text-green-400' :
-                status === 'neutral' ? 'text-blue-400' : 'text-red-400'
+            status === 'neutral' ? 'text-blue-400' : 'text-red-400'
             }`}>{value}</p>
         <div className={`w-1.5 h-1.5 rounded-full mt-2 ${status === 'good' ? 'bg-green-500 animate-pulse' :
-                status === 'neutral' ? 'bg-blue-500' : 'bg-red-500'
+            status === 'neutral' ? 'bg-blue-500' : 'bg-red-500'
             }`}></div>
     </div>
 );
