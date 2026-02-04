@@ -22,10 +22,12 @@ import RecruiterDashboard from './components/dashboards/recruiter/RecruiterDashb
 import RecruiterApplications from './components/dashboards/recruiter/RecruiterApplications'; // New Page
 import RecruiterJobs from './components/dashboards/recruiter/RecruiterJobs'; // New Page
 import RecruiterSettings from './components/dashboards/recruiter/RecruiterSettings'; // New Page
+import RecruiterMessages from './components/dashboards/recruiter/RecruiterMessages'; // New Page
 import PostJob from './components/dashboards/recruiter/PostJob';
 import AdminDashboard from './components/dashboards/admin/AdminDashboard';
 import AdminSettings from './components/dashboards/admin/AdminSettings';
 import AdminModeration from './components/dashboards/admin/AdminModeration';
+import AdminSupport from './components/dashboards/admin/AdminSupport';
 
 function App() {
   const location = useLocation();
@@ -115,6 +117,11 @@ function App() {
                 <RecruiterApplications />
               </PageTransition>
             } />
+            <Route path="messages" element={
+              <PageTransition>
+                <RecruiterMessages />
+              </PageTransition>
+            } />
             <Route path="settings" element={
               <PageTransition>
                 <RecruiterSettings />
@@ -136,6 +143,11 @@ function App() {
           <Route path="/dashboard/admin/moderation" element={
             <PageTransition>
               <AdminModeration />
+            </PageTransition>
+          } />
+          <Route path="/dashboard/admin/support" element={
+            <PageTransition>
+              <AdminSupport />
             </PageTransition>
           } />
         </Routes>

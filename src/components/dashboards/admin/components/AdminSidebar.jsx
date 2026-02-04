@@ -5,7 +5,8 @@ import {
     ShieldAlert,
     BarChart2,
     Settings,
-    LogOut
+    LogOut,
+    MessageSquare
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -18,12 +19,13 @@ const AdminSidebar = ({ isOpen, onClose, activePage: propActivePage }) => {
         { icon: <LayoutGrid size={20} />, label: 'Dashboard', id: 'Dashboard', path: '/dashboard/admin' },
         { icon: <Users size={20} />, label: 'Users', id: 'Users', path: '/dashboard/admin/users' },
         { icon: <ShieldAlert size={20} />, label: 'Moderation', id: 'Moderation', path: '/dashboard/admin/moderation', badge: 12 },
+        { icon: <MessageSquare size={20} />, label: 'Support Desk', id: 'Support', path: '/dashboard/admin/support', badge: 3 },
         { icon: <BarChart2 size={20} />, label: 'Reports', id: 'Reports', path: '/dashboard/admin/reports' },
         { icon: <Settings size={20} />, label: 'Settings', id: 'Settings', path: '/dashboard/admin/settings' },
     ];
 
     return (
-        <aside className={`fixed inset-y-0 left-0 w-64 bg-navy-sidebar border-r border-gray-800/50 flex flex-col z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <aside className={`fixed inset-y-0 left-0 w-64 bg-[#151A25] border-r border-gray-800/50 flex flex-col z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             {/* Logo Area */}
             <div
                 className="h-16 flex items-center px-6 border-b border-gray-800/50 cursor-pointer hover:bg-white/5 transition-colors"
