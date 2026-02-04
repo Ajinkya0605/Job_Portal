@@ -10,10 +10,10 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const AdminSidebar = ({ isOpen, onClose, activePage: propActivePage }) => {
+const AdminSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const activePage = propActivePage || location.pathname;
+    const activePage = location.pathname;
 
     const menuItems = [
         { icon: <LayoutGrid size={20} />, label: 'Dashboard', id: 'Dashboard', path: '/dashboard/admin' },
@@ -42,9 +42,7 @@ const AdminSidebar = ({ isOpen, onClose, activePage: propActivePage }) => {
             {/* Navigation */}
             <nav className="flex-1 py-6 px-3 space-y-1">
                 {menuItems.map((item) => {
-                    // Check if active: exact match for most, or loose match if needed. 
-                    // For now, simple exact match or check if it starts with the path for sub-routes
-                    const isActive = activePage === item.path;
+                    const isActive = activePage === item.path || (item.path !== '/dashboard/admin' && activePage.startsWith(item.path));
 
                     return (
                         <button
@@ -99,4 +97,3 @@ const AdminSidebar = ({ isOpen, onClose, activePage: propActivePage }) => {
 };
 
 export default AdminSidebar;
-

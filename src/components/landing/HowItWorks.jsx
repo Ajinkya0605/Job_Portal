@@ -34,9 +34,9 @@ const HowItWorks = () => {
         </div>
 
         <div className="relative">
-          {/* Vertical Line - Left on mobile, Center on desktop */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1f6b7a] via-[#3b82f6] to-transparent md:-ml-[1px] opacity-30"></div>
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1f6b7a] via-[#3b82f6] to-transparent md:-ml-[1px] blur-[2px] opacity-50"></div>
+          {/* Vertical Line - Hidden on mobile, Center on desktop */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1f6b7a] via-[#3b82f6] to-transparent -ml-[1px] opacity-30"></div>
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1f6b7a] via-[#3b82f6] to-transparent -ml-[1px] blur-[2px] opacity-50"></div>
 
           <div className="flex flex-col gap-16 sm:gap-28">
             {steps.map((step, idx) => (
@@ -44,14 +44,16 @@ const HowItWorks = () => {
                 key={idx}
                 className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-0 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Dot Marker */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-[5px] md:-translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-20">
+                {/* Dot Marker - Hidden on mobile or centered if you prefer, but reducing clutter on mobile is often better. Let's keep it but simplified or hidden if it relies on absolute positioning. 
+                   Actually, let's keep it visible ONLY on desktop to simplify mobile "center" view as per request.
+                */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 items-center justify-center z-20">
                   <div className="w-4 h-4 rounded-full bg-[#15171c] border-2 border-primary shadow-[0_0_10px_rgba(31,107,122,1)] relative z-10"></div>
                   <div className="absolute w-8 h-8 rounded-full bg-primary/20 animate-pulse-slow"></div>
                 </div>
 
                 {/* Text Section */}
-                <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 !== 0 ? 'md:pl-16 md:text-left' : 'md:pr-16 md:text-right'}`}>
+                <div className={`w-full md:w-1/2 text-center md:text-left ${idx % 2 !== 0 ? 'md:pl-16' : 'md:pr-16 md:text-right'}`}>
                   <div className="inline-block p-2 rounded-lg bg-surface-dark border border-white/5 mb-4 shadow-sm">
                     <span className="text-xs font-bold text-primary font-mono">0{idx + 1}</span>
                   </div>
@@ -60,7 +62,7 @@ const HowItWorks = () => {
                 </div>
 
                 {/* Image Section */}
-                <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 !== 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                <div className={`w-full md:w-1/2 ${idx % 2 !== 0 ? 'md:pr-16' : 'md:pl-16'}`}>
                   <div className="w-full aspect-video rounded-xl bg-[#15171c]/50 backdrop-blur-sm border border-white/10 overflow-hidden relative shadow-2xl group hover:border-primary/30 transition-all duration-500 transform hover:scale-[1.02]">
                     <img
                       src={step.image}

@@ -1,16 +1,14 @@
 ﻿import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import AdminSidebar from './components/AdminSidebar';
 import AdminHeader from './components/AdminHeader';
-import StatsGrid from './components/StatsGrid';
-import { ReportsVolumeChart, FlagReasonsChart } from './components/AdminCharts';
-import PriorityTaskList from './components/PriorityTaskList';
 
 const AdminDashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
         <div className="min-h-screen bg-[#0B0B15] font-sans selection:bg-[#33ddff] selection:text-[#0B0B15] text-gray-200 flex flex-col lg:flex-row overflow-hidden">
-            <AdminSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} activePage="Moderation" />
+            <AdminSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
             {/* Mobile Sidebar Overlay */}
             {isSidebarOpen && (
@@ -29,29 +27,10 @@ const AdminDashboard = () => {
 
                 <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />
 
-                <div className="flex-1 p-4 sm:p-8 overflow-y-auto z-10 relative custom-scrollbar">
-                    <StatsGrid />
-
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                        <div className="lg:col-span-2">
-                            {/* Fixed height for chart area consistency */}
-                            <div className="h-auto min-h-[300px] sm:h-[400px]">
-                                <ReportsVolumeChart />
-                            </div>
-                        </div>
-                        <div className="lg:col-span-1">
-                            <div className="h-auto min-h-[300px] sm:h-[400px]">
-                                <FlagReasonsChart />
-                            </div>
-                        </div>
-                    </div>
-
-                    <PriorityTaskList />
-                </div>
+                <Outlet />
             </main>
         </div>
     );
 };
 
 export default AdminDashboard;
-

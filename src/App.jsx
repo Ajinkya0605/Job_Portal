@@ -28,6 +28,8 @@ import AdminDashboard from './components/dashboards/admin/AdminDashboard';
 import AdminSettings from './components/dashboards/admin/AdminSettings';
 import AdminModeration from './components/dashboards/admin/AdminModeration';
 import AdminSupport from './components/dashboards/admin/AdminSupport';
+import AdminOverview from './components/dashboards/admin/AdminOverview';
+import UsersPage from './components/dashboards/admin/UsersPage';
 
 function App() {
   const location = useLocation();
@@ -134,22 +136,13 @@ function App() {
             <PageTransition>
               <AdminDashboard />
             </PageTransition>
-          } />
-          <Route path="/dashboard/admin/settings" element={
-            <PageTransition>
-              <AdminSettings />
-            </PageTransition>
-          } />
-          <Route path="/dashboard/admin/moderation" element={
-            <PageTransition>
-              <AdminModeration />
-            </PageTransition>
-          } />
-          <Route path="/dashboard/admin/support" element={
-            <PageTransition>
-              <AdminSupport />
-            </PageTransition>
-          } />
+          }>
+            <Route index element={<AdminOverview />} />
+            <Route path="users" element={<UsersPage />} />
+            <Route path="settings" element={<AdminSettings />} />
+            <Route path="moderation" element={<AdminModeration />} />
+            <Route path="support" element={<AdminSupport />} />
+          </Route>
         </Routes>
       </AnimatePresence>
     </div >

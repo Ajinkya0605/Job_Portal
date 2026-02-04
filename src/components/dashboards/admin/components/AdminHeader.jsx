@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Search, Bell, ShieldCheck } from 'lucide-react';
+import { Search, Bell, ShieldCheck, Menu } from 'lucide-react';
 
 const AdminHeader = ({ onMenuClick, title }) => {
     return (
@@ -9,14 +9,14 @@ const AdminHeader = ({ onMenuClick, title }) => {
             <div className="flex items-center gap-4">
                 <button
                     onClick={onMenuClick}
-                    className="lg:hidden text-gray-400 hover:text-white"
+                    className="lg:hidden text-gray-400 hover:text-white p-2 -ml-2"
                 >
-                    <span className="material-symbols-outlined">menu</span>
+                    <Menu size={24} />
                 </button>
 
                 <div className="flex items-center gap-4">
                     <h1 className="text-lg font-bold text-white flex items-center gap-2">
-                        {title || "Moderation"} <span className="hidden sm:inline">{!title ? "Console" : ""}</span>
+                        {title || "Overview"} <span className="hidden sm:inline">{!title ? "" : ""}</span>
                     </h1>
                     <div className="hidden sm:block h-4 w-px bg-gray-700"></div>
                     <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-green-500 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
@@ -33,7 +33,7 @@ const AdminHeader = ({ onMenuClick, title }) => {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-hover:text-recruiter-primary transition-colors" size={16} />
                     <input
                         type="text"
-                        placeholder="Search ID, User, or Reason..."
+                        placeholder="Search..."
                         className="bg-[#151A25] border border-gray-800 rounded-lg pl-10 pr-4 py-2 text-sm text-gray-300 focus:outline-none focus:border-recruiter-primary/50 focus:ring-1 focus:ring-recruiter-primary/50 w-48 xl:w-64 transition-all"
                     />
                 </div>
@@ -52,4 +52,3 @@ const AdminHeader = ({ onMenuClick, title }) => {
 };
 
 export default AdminHeader;
-
