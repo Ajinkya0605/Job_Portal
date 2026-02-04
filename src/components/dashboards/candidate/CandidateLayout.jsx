@@ -43,10 +43,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                     onClick={() => navigate('/')}
                 >
                     <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 text-[#1f6b7a] flex items-center justify-center bg-[#1f6b7a]/20 rounded-full border border-[#1f6b7a]/30 p-0">
-                            <span className="material-symbols-outlined text-[32px] leading-none">psychology</span>
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-[#1f6b7a]/20 text-[#1f6b7a] rounded-full border border-[#1f6b7a]/30">
+                            <span className="material-symbols-outlined text-[18px] sm:text-[20px] font-semibold">psychology</span>
                         </div>
-                        <h2 className="text-white text-lg font-bold tracking-tight font-sans">SkillHire</h2>
+                        <h2 className="text-white text-lg sm:text-xl font-bold tracking-tight font-sans">SkillHire</h2>
                     </div>
                     <button
                         className="lg:hidden ml-auto text-gray-500 hover:text-white transition-colors focus:outline-none"

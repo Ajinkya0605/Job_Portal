@@ -30,8 +30,8 @@ const AdminSidebar = ({ isOpen, onClose, activePage: propActivePage }) => {
                 onClick={() => navigate('/')}
             >
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-recruiter-primary/20 flex items-center justify-center text-recruiter-primary border border-recruiter-primary/30">
-                        <ShieldAlert size={18} />
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-[#33ddff]/20 text-[#33ddff] rounded-full border border-[#33ddff]/30">
+                        <span className="material-symbols-outlined text-[18px] sm:text-[20px] font-semibold">psychology</span>
                     </div>
                     <span className="text-xl font-bold text-white font-sans tracking-tight">SkillHire</span>
                 </div>
