@@ -1,7 +1,22 @@
 ﻿import React from 'react';
 import { Search, Bell, ShieldCheck, Menu } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
-const AdminHeader = ({ onMenuClick, title }) => {
+const AdminHeader = ({ onMenuClick }) => {
+    const location = useLocation();
+
+    const getTitle = () => {
+        const path = location.pathname;
+        if (path.includes('users')) return 'User Management';
+        if (path.includes('moderation')) return 'Moderation Console';
+        if (path.includes('support')) return 'Support Desk';
+        if (path.includes('settings')) return 'Settings';
+        if (path.includes('reports')) return 'Reports';
+        return 'Admin Dashboard';
+    };
+
+    const title = getTitle();
+
     return (
         <header className="h-16 border-b border-gray-800/50 bg-[#0B0B15] px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
 
@@ -16,7 +31,7 @@ const AdminHeader = ({ onMenuClick, title }) => {
 
                 <div className="flex items-center gap-4">
                     <h1 className="text-lg font-bold text-white flex items-center gap-2">
-                        {title || "Overview"} <span className="hidden sm:inline">{!title ? "" : ""}</span>
+                        {title}
                     </h1>
                     <div className="hidden sm:block h-4 w-px bg-gray-700"></div>
                     <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-green-500 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
