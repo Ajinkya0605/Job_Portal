@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { JobCard } from './CandidateComponents';
 
 export default function CandidateJobSearch() {
+    const { setSidebarOpen } = useOutletContext();
     const [activeTab, setActiveTab] = useState('recommended');
 
     return (
         <>
             <header className="h-20 flex-shrink-0 flex items-center justify-between px-6 border-b border-white/5 bg-[#15171c]/95 backdrop-blur-md relative z-20">
-                <h1 className="text-xl font-bold text-white tracking-tight">Find Jobs</h1>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="lg:hidden text-gray-400 hover:text-white"
+                    >
+                        <span className="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 className="text-xl font-bold text-white tracking-tight">Find Jobs</h1>
+                </div>
                 {/* Could add user profile or notification icons here if needed to match Dashboard */}
             </header>
 

@@ -5,7 +5,8 @@ import {
     ShieldAlert,
     BarChart2,
     Settings,
-    LogOut
+    LogOut,
+    MessageSquare
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -18,20 +19,21 @@ const AdminSidebar = ({ isOpen, onClose }) => {
         { icon: <LayoutGrid size={20} />, label: 'Dashboard', id: 'Dashboard', path: '/dashboard/admin' },
         { icon: <Users size={20} />, label: 'Users', id: 'Users', path: '/dashboard/admin/users' },
         { icon: <ShieldAlert size={20} />, label: 'Moderation', id: 'Moderation', path: '/dashboard/admin/moderation', badge: 12 },
+        { icon: <MessageSquare size={20} />, label: 'Support Desk', id: 'Support', path: '/dashboard/admin/support', badge: 3 },
         { icon: <BarChart2 size={20} />, label: 'Reports', id: 'Reports', path: '/dashboard/admin/reports' },
         { icon: <Settings size={20} />, label: 'Settings', id: 'Settings', path: '/dashboard/admin/settings' },
     ];
 
     return (
-        <aside className={`fixed inset-y-0 left-0 w-64 bg-navy-sidebar border-r border-gray-800/50 flex flex-col z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <aside className={`fixed inset-y-0 left-0 w-64 bg-[#151A25] border-r border-gray-800/50 flex flex-col z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             {/* Logo Area */}
             <div
                 className="h-16 flex items-center px-6 border-b border-gray-800/50 cursor-pointer hover:bg-white/5 transition-colors"
                 onClick={() => navigate('/')}
             >
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-recruiter-primary/20 flex items-center justify-center text-recruiter-primary border border-recruiter-primary/30">
-                        <ShieldAlert size={18} />
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-[#33ddff]/20 text-[#33ddff] rounded-full border border-[#33ddff]/30">
+                        <span className="material-symbols-outlined text-[18px] sm:text-[20px] font-semibold">psychology</span>
                     </div>
                     <span className="text-xl font-bold text-white font-sans tracking-tight">SkillHire</span>
                 </div>
@@ -40,9 +42,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
             {/* Navigation */}
             <nav className="flex-1 py-6 px-3 space-y-1">
                 {menuItems.map((item) => {
-                    // Check if active: exact match for most, or loose match if needed. 
-                    // For now, simple exact match or check if it starts with the path for sub-routes
-                    const isActive = activePage === item.path;
+                    const isActive = activePage === item.path || (item.path !== '/dashboard/admin' && activePage.startsWith(item.path));
 
                     return (
                         <button
@@ -97,4 +97,3 @@ const AdminSidebar = ({ isOpen, onClose }) => {
 };
 
 export default AdminSidebar;
-

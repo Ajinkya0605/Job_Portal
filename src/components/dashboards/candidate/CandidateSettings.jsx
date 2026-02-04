@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import {
     Lock, Shield, Bell, Trash2, Eye, EyeOff, Save, AlertTriangle,
     FileText, Upload, Briefcase, MapPin, DollarSign,
@@ -6,55 +7,65 @@ import {
 } from 'lucide-react';
 
 export default function CandidateSettings() {
+    const { setSidebarOpen } = useOutletContext();
     const [activeTab, setActiveTab] = useState('documents');
 
     return (
-        <div className="flex-1 w-full min-w-0 overflow-y-auto overflow-x-hidden bg-[#15171c] relative z-10 custom-scrollbar">
-            <div className="w-full max-w-full xl:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-6 space-y-8 pb-20">
-
-                {/* Header */}
-                <div>
-                    <h1 className="text-2xl font-bold text-white tracking-tight">Settings</h1>
-                    <p className="text-gray-400 text-sm mt-1">
-                        Manage your profile, preferences, and account security.
-                    </p>
+        <>
+            {/* Header */}
+            <header className="h-16 flex-shrink-0 flex items-center justify-between px-4 sm:px-6 bg-[#15171c]/95 backdrop-blur-md border-b border-white/5 sticky top-0 z-20">
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="lg:hidden text-gray-400 hover:text-white"
+                    >
+                        <span className="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 className="text-lg font-bold text-white">Settings</h1>
                 </div>
+            </header>
 
-                {/* Tabs */}
-                <div className="flex border-b border-white/10 overflow-x-auto custom-scrollbar gap-2 pb-2 px-1">
-                    {[
-                        { id: 'general', label: 'Account & Security', icon: Shield },
-                        { id: 'preferences', label: 'Job Preferences', icon: Briefcase },
-                        { id: 'documents', label: 'Resumes & Docs', icon: FileText },
-                        { id: 'notifications', label: 'Notifications', icon: Bell },
-                    ].map(tab => {
-                        const Icon = tab.icon;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-2 px-4 py-3 text-sm font-bold transition-all border-b-2 whitespace-nowrap flex-shrink-0
-                                ${activeTab === tab.id
-                                        ? 'border-[#1f6b7a] text-[#1f6b7a]'
-                                        : 'border-transparent text-gray-500 hover:text-white hover:border-white/20'
-                                    }`}
-                            >
-                                <Icon size={16} />
-                                {tab.label}
-                            </button>
-                        );
-                    })}
-                </div>
+            {/* Main Content */}
+            <div className="flex-1 overflow-y-auto bg-[#15171c] relative z-10 custom-scrollbar">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-6">
 
-                {/* Content */}
-                <div className="min-h-[400px] animate-fade-in-up">
-                    {activeTab === 'general' && <GeneralSection />}
-                    {activeTab === 'preferences' && <PreferencesSection />}
-                    {activeTab === 'documents' && <DocumentsSection />}
-                    {activeTab === 'notifications' && <NotificationsSection />}
+                    {/* Tabs */}
+                    <div className="flex gap-6 border-b border-white/10 overflow-x-auto custom-scrollbar">
+                        {[
+                            { id: 'general', label: 'Account', icon: Shield },
+                            { id: 'preferences', label: 'Preferences', icon: Briefcase },
+                            { id: 'documents', label: 'Documents', icon: FileText },
+                            { id: 'notifications', label: 'Notifications', icon: Bell },
+                        ].map(tab => {
+                            const Icon = tab.icon;
+                            // Shorten labels on mobile if needed, but currently keeping as is or simplifying
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`flex items-center gap-2 pb-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap
+                                    ${activeTab === tab.id
+                                            ? 'border-[#1f6b7a] text-[#1f6b7a]'
+                                            : 'border-transparent text-gray-500 hover:text-white hover:border-white/20'
+                                        }`}
+                                >
+                                    <Icon size={16} />
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* Content */}
+                    <div className="min-h-[400px] animate-fade-in-up">
+                        {activeTab === 'general' && <GeneralSection />}
+                        {activeTab === 'preferences' && <PreferencesSection />}
+                        {activeTab === 'documents' && <DocumentsSection />}
+                        {activeTab === 'notifications' && <NotificationsSection />}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

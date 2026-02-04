@@ -22,8 +22,12 @@ import RecruiterDashboard from './components/dashboards/recruiter/RecruiterDashb
 import RecruiterApplications from './components/dashboards/recruiter/RecruiterApplications'; // New Page
 import RecruiterJobs from './components/dashboards/recruiter/RecruiterJobs'; // New Page
 import RecruiterSettings from './components/dashboards/recruiter/RecruiterSettings'; // New Page
+import RecruiterMessages from './components/dashboards/recruiter/RecruiterMessages'; // New Page
 import PostJob from './components/dashboards/recruiter/PostJob';
 import AdminDashboard from './components/dashboards/admin/AdminDashboard';
+import AdminSettings from './components/dashboards/admin/AdminSettings';
+import AdminModeration from './components/dashboards/admin/AdminModeration';
+import AdminSupport from './components/dashboards/admin/AdminSupport';
 import AdminOverview from './components/dashboards/admin/AdminOverview';
 import UsersPage from './components/dashboards/admin/UsersPage';
 
@@ -115,6 +119,11 @@ function App() {
                 <RecruiterApplications />
               </PageTransition>
             } />
+            <Route path="messages" element={
+              <PageTransition>
+                <RecruiterMessages />
+              </PageTransition>
+            } />
             <Route path="settings" element={
               <PageTransition>
                 <RecruiterSettings />
@@ -130,6 +139,9 @@ function App() {
           }>
             <Route index element={<AdminOverview />} />
             <Route path="users" element={<UsersPage />} />
+            <Route path="settings" element={<AdminSettings />} />
+            <Route path="moderation" element={<AdminModeration />} />
+            <Route path="support" element={<AdminSupport />} />
           </Route>
         </Routes>
       </AnimatePresence>

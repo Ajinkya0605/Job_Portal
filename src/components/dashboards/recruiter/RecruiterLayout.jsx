@@ -44,6 +44,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 {[
                     { icon: 'work', label: 'Jobs', path: '/dashboard/recruiter/jobs', badge: 2 },
                     { icon: 'group', label: 'Candidates', path: '/dashboard/recruiter/applications', badge: 12 },
+                    { icon: 'chat', label: 'Messages', path: '/dashboard/recruiter/messages', badge: 4 },
                     { icon: 'analytics', label: 'Analytics', path: '/dashboard/recruiter/analytics' },
                     { icon: 'schedule', label: 'Interviews', path: '/dashboard/recruiter/interviews' }
                 ].map((item) => (

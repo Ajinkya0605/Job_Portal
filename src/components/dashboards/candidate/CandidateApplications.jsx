@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 const applications = [
     {
@@ -67,6 +68,7 @@ const applications = [
 ];
 
 export default function CandidateApplications() {
+    const { setSidebarOpen } = useOutletContext();
     const [expandedId, setExpandedId] = useState(null);
 
     const toggleExpand = (id) => {
@@ -76,7 +78,15 @@ export default function CandidateApplications() {
     return (
         <>
             <header className="h-20 flex-shrink-0 flex items-center justify-between px-6 border-b border-white/5 bg-[#15171c]/95 backdrop-blur-md relative z-20">
-                <h1 className="text-xl font-bold text-white tracking-tight">My Applications</h1>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="lg:hidden text-gray-400 hover:text-white"
+                    >
+                        <span className="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 className="text-xl font-bold text-white tracking-tight">My Applications</h1>
+                </div>
                 <div className="flex bg-[#21242c] rounded-lg p-1 border border-white/5">
                     <button className="px-4 py-1.5 rounded text-xs font-bold bg-[#1f6b7a] text-white shadow-lg">Active</button>
                     <button className="px-4 py-1.5 rounded text-xs font-bold text-gray-400 hover:text-white transition-colors">Archived</button>

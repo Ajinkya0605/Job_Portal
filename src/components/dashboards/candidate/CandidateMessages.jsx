@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 const users = [
     { id: 1, name: 'Sarah Wilson', role: 'Recruiter at AcmeCorp', avatar: 'SW', online: true, unread: 2, lastMsg: 'Hi John, are you available for a quick call tomorrow?', time: '10:30 AM' },
@@ -15,6 +16,7 @@ const messages = [
 ];
 
 export default function CandidateMessages() {
+    const { setSidebarOpen } = useOutletContext();
     const [activeChat, setActiveChat] = useState(1);
     const [inputText, setInputText] = useState('');
 
@@ -29,7 +31,15 @@ export default function CandidateMessages() {
 
                 {/* Header */}
                 <div className="h-16 lg:h-20 flex-shrink-0 flex items-center justify-between px-4 lg:px-6 border-b border-white/5 pr-16 lg:pr-6 relative">
-                    <h1 className="text-lg lg:text-xl font-bold text-white tracking-tight">Messages</h1>
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => setSidebarOpen(true)}
+                            className="lg:hidden text-gray-400 hover:text-white"
+                        >
+                            <span className="material-symbols-outlined">menu</span>
+                        </button>
+                        <h1 className="text-lg lg:text-xl font-bold text-white tracking-tight">Messages</h1>
+                    </div>
                     <button className="w-8 h-8 rounded-full bg-[#21242c] hover:bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 transition-colors">
                         <span className="material-symbols-outlined text-[18px]">edit_square</span>
                     </button>
